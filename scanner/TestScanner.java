@@ -41,6 +41,27 @@ public class TestScanner {
 		assertEquals(EOF, t.kind);
 		assertEquals(5, t.beg);
 	}
+	@Test
+	public void skipWhiteSpace() {
+		System.out.println("Test: skipWhiteSpace no other tokens");
+		String input = "   \n  \r   \r\n";
+		System.out.println(input);
+		TokenStream stream = new TokenStream(input);
+		Scanner scanner = new Scanner(stream);
+		scanner.scan();
+		System.out.println(stream);
+		assertEquals(SEMICOLON, stream.nextToken().kind);
+		assertEquals(SEMICOLON, stream.nextToken().kind);
+		assertEquals(SEMICOLON, stream.nextToken().kind);
+		assertEquals(MOD, stream.nextToken().kind);
+		assertEquals(AT, stream.nextToken().kind);
+		assertEquals(MOD, stream.nextToken().kind);
+		assertEquals(SEMICOLON, stream.nextToken().kind);
+		assertEquals(SEMICOLON, stream.nextToken().kind);
+		Token t = stream.nextToken();
+		assertEquals(SEMICOLON, t.kind);
+		assertEquals(4,t.getLineNumber());
+	}
 
     /*
 	@Test
