@@ -33,9 +33,9 @@ public class TokenStream {
 		int length = inputString.length();
 		inputChars = new char[length];
 		inputString.getChars(0, length, inputChars, 0);
-		System.out.println("inputChars length:"+length);
-		for(int i=0;i<length;i++)
-		    System.out.print((int)inputChars[i]+",");
+		//System.out.println("inputChars length:"+length);
+		//for(int i=0;i<length;i++)
+		//    System.out.print((int)inputChars[i]+",");
 	}
 
 	// reads all the characters in the given reader into a char array.
