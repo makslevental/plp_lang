@@ -13,73 +13,133 @@ import static cop5555sp15.TokenStream.Kind.*;
 
 public class TestScanner {
 
-	@Test
-	public void emptyInput() {
-		System.out.println("Test: emptyInput");
-		String input = "";
-		System.out.println(input);
-		TokenStream stream = new TokenStream(input);
-		Scanner scanner = new Scanner(stream);
-		scanner.scan();
-		System.out.println(stream);
-		assertEquals(1, stream.tokens.size()); // creates EOF token
-		assertEquals(EOF, stream.nextToken().kind);
+    @Test
+    public void emptyInput() {
+	System.out.println("Test: emptyInput");
+	String input = "";
+	System.out.println(input);
+	TokenStream stream = new TokenStream(input);
+	Scanner scanner = new Scanner(stream);
+	scanner.scan();
+	System.out.println(stream);
+	assertEquals(1, stream.tokens.size()); // creates EOF token
+	assertEquals(EOF, stream.nextToken().kind);
 
-	}
+    }
 
-	@Test
-	public void onlySpaces() {
-		System.out.println("Test: onlySpaces");
-		String input = "     "; // five spaces
-		System.out.println("input is five spaces");
-		TokenStream stream = new TokenStream(input);
-		Scanner scanner = new Scanner(stream);
-		scanner.scan();
-		assertEquals(1, stream.tokens.size()); // creates EOF token
-		Token t = stream.nextToken();
-		System.out.println(stream);
-		assertEquals(EOF, t.kind);
-		assertEquals(5, t.beg);
-	}
-	@Test
-	public void skipWhiteSpaceMax() {
-		System.out.println("Test: skipWhiteSpace no other tokens");
-		String input = "   \n  \r   \r\n";
-		System.out.println(input);
-		TokenStream stream = new TokenStream(input);
-		Scanner scanner = new Scanner(stream);
-		scanner.scan();
-		assertEquals(1, stream.tokens.size());
-		System.out.println(stream);
-		Token t = stream.nextToken();
-		assertEquals(EOF, t.kind);
-		assertEquals(12, t.beg);
-		assertEquals(4,t.getLineNumber());
-	}
+    @Test
+    public void onlySpaces() {
+	System.out.println("Test: onlySpaces");
+	String input = "     "; // five spaces
+	System.out.println("input is five spaces");
+	TokenStream stream = new TokenStream(input);
+	Scanner scanner = new Scanner(stream);
+	scanner.scan();
+	assertEquals(1, stream.tokens.size()); // creates EOF token
+	Token t = stream.nextToken();
+	System.out.println(stream);
+	assertEquals(EOF, t.kind);
+	assertEquals(5, t.beg);
+    }
+    @Test
+    public void skipWhiteSpaceMax() {
+	System.out.println("Test: skipWhiteSpace no other tokens");
+	String input = "   \n  \r   \r\n";
+	System.out.println(input);
+	TokenStream stream = new TokenStream(input);
+	Scanner scanner = new Scanner(stream);
+	scanner.scan();
+	assertEquals(1, stream.tokens.size());
+	System.out.println(stream);
+	Token t = stream.nextToken();
+	assertEquals(EOF, t.kind);
+	assertEquals(12, t.beg);
+	assertEquals(4,t.getLineNumber());
+    }
 
-    /*
-	@Test
-	public void skipWhiteSpace() {
-		System.out.println("skipWhiteSpace");
-		String input = "   ;;;   %@%\n  \r   \r\n ;;;";
-		System.out.println(input);
-		TokenStream stream = new TokenStream(input);
-		Scanner scanner = new Scanner(stream);
-		scanner.scan();
-		System.out.println(stream);
-		assertEquals(SEMICOLON, stream.nextToken().kind);
-		assertEquals(SEMICOLON, stream.nextToken().kind);
-		assertEquals(SEMICOLON, stream.nextToken().kind);
-		assertEquals(MOD, stream.nextToken().kind);
-		assertEquals(AT, stream.nextToken().kind);
-		assertEquals(MOD, stream.nextToken().kind);
-		assertEquals(SEMICOLON, stream.nextToken().kind);
-		assertEquals(SEMICOLON, stream.nextToken().kind);
-		Token t = stream.nextToken();
-		assertEquals(SEMICOLON, t.kind);
-		assertEquals(4,t.getLineNumber());
-	}
+    @Test
+    public void onlyComment() {
+    	System.out.println("Test: onlyComment");
+    	String input = "/* */";
+    	System.out.println(input);
+    	TokenStream stream = new TokenStream(input);
+    	Scanner scanner = new Scanner(stream);
+    	scanner.scan();
+    	System.out.println(stream);
+    	Kind[] expectedKinds = { EOF };
+    	String[] expectedTexts = { "" }; // need empty string for eof
+    	assertArrayEquals(expectedKinds, makeKindArray(stream));
+    	assertArrayEquals(expectedTexts, makeTokenTextArray(stream));
+	Token t = stream.nextToken();
+	assertEquals(EOF, t.kind);
+	assertEquals(5, t.beg);
+	assertEquals(1,t.getLineNumber());
+    }
 
+    @Test
+    public void commentWithWhiteSpace() {
+    	System.out.println("Test: comments with whitespace");
+    	String input = "/*  \t \t \r \n \r\n   */";
+    	System.out.println(input);
+    	TokenStream stream = new TokenStream(input);
+    	Scanner scanner = new Scanner(stream);
+    	scanner.scan();
+    	System.out.println(stream);
+    	Kind[] expectedKinds = { EOF };
+    	String[] expectedTexts = { "" }; // need empty string for eof
+    	assertArrayEquals(expectedKinds, makeKindArray(stream));
+    	assertArrayEquals(expectedTexts, makeTokenTextArray(stream));
+	Token t = stream.nextToken();
+	assertEquals(EOF, t.kind);
+	assertEquals(19, t.beg);
+	assertEquals(4,t.getLineNumber());
+
+    }
+
+    @Test
+    public void commentWithCharacters() {
+    	System.out.println("Test: comments with character");
+    	String input = "/*123456789*/";
+    	System.out.println(input);
+    	TokenStream stream = new TokenStream(input);
+    	Scanner scanner = new Scanner(stream);
+    	scanner.scan();
+    	System.out.println(stream);
+    	Kind[] expectedKinds = { EOF };
+    	String[] expectedTexts = { "" }; // need empty string for eof
+    	assertArrayEquals(expectedKinds, makeKindArray(stream));
+    	assertArrayEquals(expectedTexts, makeTokenTextArray(stream));
+	Token t = stream.nextToken();
+	assertEquals(EOF, t.kind);
+	assertEquals(13, t.beg);
+	assertEquals(1,t.getLineNumber());
+
+    }
+
+
+  
+	// @Test
+	// public void skipWhiteSpace() {
+	// 	System.out.println("Test: skipWhiteSpace");
+	// 	String input = "   ;;;   %@%\n  \r   \r\n ;;;";
+	// 	System.out.println(input);
+	// 	TokenStream stream = new TokenStream(input);
+	// 	Scanner scanner = new Scanner(stream);
+	// 	scanner.scan();
+	// 	System.out.println(stream);
+	// 	assertEquals(SEMICOLON, stream.nextToken().kind);
+	// 	assertEquals(SEMICOLON, stream.nextToken().kind);
+	// 	assertEquals(SEMICOLON, stream.nextToken().kind);
+	// 	assertEquals(MOD, stream.nextToken().kind);
+	// 	assertEquals(AT, stream.nextToken().kind);
+	// 	assertEquals(MOD, stream.nextToken().kind);
+	// 	assertEquals(SEMICOLON, stream.nextToken().kind);
+	// 	assertEquals(SEMICOLON, stream.nextToken().kind);
+	// 	Token t = stream.nextToken();
+	// 	assertEquals(SEMICOLON, t.kind);
+	// 	assertEquals(4,t.getLineNumber());
+	// }
+  /*
 	@Test
 	public void noWhiteSpace() {
 		System.out.println("Test: noWhitespace");

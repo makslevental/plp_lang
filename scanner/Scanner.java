@@ -1,17 +1,21 @@
 package cop5555sp15;
-
+import java.util.*;
 import java.io.IOException;
 
 import cop5555sp15.TokenStream.Kind;
 import cop5555sp15.TokenStream.Token;
 import static cop5555sp15.TokenStream.Kind.*;
 
+
 public class Scanner {
 
     private enum State {
-	START, GOT_EQUALS, IDENT_PART, GOT_ZERO, DIGITS, EOF, GOTCR, SLASH, COMMENT
+	START, GOT_EQUALS, IDENT_PART, GOT_ZERO, DIGITS, EOF, GOTCR, SLASH, COMMENT, WHITESPACE, OPERATOR, SEPARATOR
     }
     private State state;
+    public static final Set<Character> sepBegs = new HashSet<Character>(Arrays.asList('.' , ';' , ',' , '(' , ')' , '[' , ']', '{' , '}', ':', '?'));
+    public static final Set<Character> opBegs = new HashSet<Character>(Arrays.asList('=' , '|' , '&' , '!' , '<' , '>' , '+' , '-' , '*' , '/' , '%' , '@'));
+    public static final Set<Character> whiteSp = new HashSet<Character>(Arrays.asList('\n','\t','\r',' '));
     //local references to TokenStream objects for convenience
     final TokenStream tStream;  //set in constructor
     private int index; // points to the next char to process during scanning, or if none, past the end of the array
@@ -19,12 +23,11 @@ public class Scanner {
     int lineNum;
     public Scanner(TokenStream tStrm){
 	tStream = tStrm;
-	state = State.START;
 	index = 0;
 	lineNum = 1;
-	
     }
    
+    
     private char getch() throws IOException {
 	if(tStream.inputChars.length>=index+1)
 	    ch = tStream.inputChars[index++];
@@ -36,9 +39,11 @@ public class Scanner {
 
     //returns the next token in the input
     public Token next() throws IOException, NumberFormatException {
+
 	state = State.START;
 	Token t = null;
 	int begOffset=0;
+
 	getch();
 	do { // loop terminates when a token is created 
 	    switch (state) { 
@@ -49,110 +54,100 @@ public class Scanner {
 		begOffset = index;
 		//System.out.println("index:"+index);
 		//System.out.println((int)ch);
-		switch (ch) {
-		case '\0':  //empty file
-		    //System.out.println((int)ch);
-		    //System.out.println("eof");
+		if(ch =='\0'){
 		    state = State.EOF;
 		    break;
-		case ' ': //blank space, stay in start
-		    //		    System.out.println("blank space");
-		    break;
-		case '\r':
-		    state = State.GOTCR;
-		    break;
-		case '\n':
-		    lineNum++;
-		    break;
-		case '\t':
-		    break;
-		case '/':
-		    state = State.SLASH;
-		    // case '=':
-		    //     state = State.GOT_EQUALS;
-		    //     break;
-		    // case '*':
-		    //     t = new Token(TIMES, begOffset, index);
-		    //     break;
-		    // case '+':
-		    //     t = new Token(PLUS, begOffset, index);
-		    //     break;
-		    // case '0':
-		    //     state = State.GOT_ZERO;
-		    //     break;
-		    // default:
-		    //     if (Character.isDigit(ch)) {
-		    // 	state = State.DIGITS;
-		    //     } else if (Character.isJavaIdentifierStart(ch)) {
-		    // 	state = State.IDENT_PART;
-		    //     } else {
-		    // 	handle error
-		    // 	    }
 		}
-		if(state != State.EOF){
+		else if(whiteSp.contains(ch)){
+		    state = State.WHITESPACE;
+		    break;
+		}
+		else if(opBegs.contains(ch)){
+		    state = State.OPERATOR; 
+		    break;
+		}
+		else if(sepBegs.contains(ch)){
+		    state = State.SEPARATOR;
+		    break;
+		}
+		else{
+		    switch(ch){
+		    }
 		    getch();
-		    //System.out.println(index);
 		}
+		//System.out.println(index);
 		break; // end of state START
-	    case GOTCR:
-		switch(ch){
-		case '\n':
-		    //ms newline, eat \n
-		    getch();
-		    break;
-		default:
-		    //carriage return for new line so don't eat current char
-		}
-		lineNum++;
-		state = State.START;
-		break;
-		// case IDENT:
-		// case KEYWORD: ....
-		// case INT_LITERAL: ....
-		// case BOOLEAN_LITERAL: ....
-		// case NULL_LITERAL: ....
-		// case SEPARATOR: ....
-		// case OPERATOR:
-		// case STRING_LITERAL: 
-		// 	switch (ch) {
-		// 	case '':
-		// 	    t = new Token(ASSIGN, begOffset, index);
-		// 	    break;
-		// 	case '=':
-		// 	    t = new Token(EQUAL, begOffset, index);
-		// 	    break;
-		// 	default:
-		// 	    if (Character.isDigit(ch)) {
-		// 		state = State.DIGITS;
-		// 	    } else if (Character.isJavaIdentifierStart(ch)) {
-		// 		state = State.IDENT_PART;
-		// 	    } else {
-		// 		handle error
-		// 		    }
-		// 	}
-		// 	getch();
-		// 	break; // end of state START
 	    case EOF:
-		t = tStream.new Token(EOF, begOffset, index, lineNum);
+		t = makeDefaTok(EOF,begOffset);
 		break;
-	    case SLASH:
-		switch(ch){
-		case '*':
-		    state = State.COMMENT;
-		    break;
-		default:
-		    t = tStream.new Token(DIV, begOffset, index-1, lineNum);
-		    //don't eat the character
-		    state = State.START;
+	    case WHITESPACE:
+		if(ch==' ' || ch=='\t'){ //blank space, getch, then go back to start
+		    getch();
 		}
+		else if(ch=='\r'){ // CR, getch next char, if not \n then incr lineNum and leave next otherwise, increment and getch again
+		    getch();
+		    if(ch == '\n')
+			getch();
+		    lineNum++;	    
+		}
+		else {// if(ch== '\n'):
+		    getch();
+		    lineNum++;
+		}
+	        state = State.START;
+	        break;
+	    case OPERATOR:
+		if (ch=='/'){
+		    getch();
+		    switch(ch){
+		    case '*':
+			state = State.COMMENT;
+			break;
+		    default:
+			t = tStream.new Token(DIV, begOffset, index-1, lineNum);
+			//don't eat the character
+			state = State.START;
+		    }
+		    break;
+		}
+	    case SEPARATOR:
+		if(ch=='.'){
+		    //tok.makeDefaTok(DOT);//
+		    t = makeDefaTok(DOT, begOffset);
+		}
+
+		///////////////////////////////////////////////
+		//implement rest of separators
+		//
+		///////////////////////////////////////////////
+
+
+
+
+
 	    case COMMENT:
 		boolean inComment = true;
 		getch(); // have eaten /*, char right after '/*' in ch
+		//System.out.println(ch+" "+index);
 		do {
 		    switch(ch){
+		    case '\n':
+			lineNum++;
+			break;
+		    case '\r':
+			getch();
+			if(ch=='\n'){
+			    lineNum++;
+			    break;
+			}
+			else{
+			    lineNum++;
+			    continue;
+			}
 		    case '*':
 			getch();
 			if(ch=='/'){
+			    state = State.START;
 			    inComment = false;
 			    break;
 			}
@@ -161,6 +156,7 @@ public class Scanner {
 		    }
 		    getch();
 		} while(inComment);
+		break;
 	    default:
 		assert false : "should not reach here";
 	    }// end of switch(state)
@@ -180,5 +176,11 @@ public class Scanner {
 	    e.printStackTrace();
 	}
     }
+
+    private Token makeDefaTok(Kind typ,int begOffset){
+	return tStream.new Token(typ,begOffset,index,lineNum);
+    }
+
+   
 }
 
