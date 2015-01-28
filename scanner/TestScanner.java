@@ -275,7 +275,7 @@ public class TestScanner {
 	System.out.println(stream);
 	Token t0 = stream.new Token(ASSIGN, 0, 1, 1);
 	Token t1 = stream.new Token(EQUAL, 2, 4, 1);
-	Token t2 = stream.new Token(EOF, 4, 5, 1);
+	Token t2 = stream.new Token(EOF, 4, 4, 1);
 	ArrayList<Token> expected_tokens = new ArrayList<Token>();
 	expected_tokens.add(t0);
 	expected_tokens.add(t1);
@@ -413,7 +413,7 @@ public class TestScanner {
     
     @Test
     public void comments() {
-	System.out.println("comments");
+	System.out.println("Test: comments");
 	String input = "/**/ 0 1 45+ 67<=9";
 	System.out.println(input);
 	TokenStream stream = new TokenStream(input);
@@ -433,7 +433,7 @@ public class TestScanner {
 
     @Test
     public void comments2() {
-	System.out.println("comments2");
+	System.out.println("Test: comments2");
 	String input = "/**/ 0 1 /** ***/ 45+ 67<=9";
 	System.out.println(input);
 	TokenStream stream = new TokenStream(input);
@@ -453,7 +453,7 @@ public class TestScanner {
 
     @Test
     public void comments3() {
-	System.out.println("comments3");
+	System.out.println("Test: comments3");
 	String input = "/**/ 0 1 /** ***/ 45+ 67<=9/*";
 	System.out.println(input);
 	TokenStream stream = new TokenStream(input);
@@ -470,7 +470,7 @@ public class TestScanner {
 
     @Test
     public void onlyComment2() {
-	System.out.println("onlyComment");
+	System.out.println("Test: onlyComment");
 	String input = "/**/";
 	System.out.println(input);
 	TokenStream stream = new TokenStream(input);
@@ -485,7 +485,7 @@ public class TestScanner {
 
     @Test
     public void singleSlash(){
-	System.out.println("singleSlash");
+	System.out.println("Test: singleSlash");
 	String input = "/";
 	System.out.println(input);
 	TokenStream stream = new TokenStream(input);
@@ -498,6 +498,18 @@ public class TestScanner {
     public void unterminatedString(){
 	System.out.println("Test: unterminated string");
 	String input = "\"  ";
+	System.out.println(input);
+	TokenStream stream = new TokenStream(input);
+	Scanner scanner = new Scanner(stream);
+	scanner.scan();
+	System.out.println(stream);
+	assertEquals(UNTERMINATED_STRING, stream.nextToken().kind);
+    }
+
+    @Test
+    public void unterminatedStringWithText(){
+	System.out.println("Test: unterminated string with text");
+	String input = "\" asdfasdf ";
 	System.out.println(input);
 	TokenStream stream = new TokenStream(input);
 	Scanner scanner = new Scanner(stream);

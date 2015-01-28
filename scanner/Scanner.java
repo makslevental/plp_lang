@@ -63,7 +63,7 @@ public class Scanner {
 		begOffset = index-1;
 		//System.out.println("index:"+index);
 		//System.out.println((int)ch);
-		if(ch=='\0') t = makeDefaTok(EOF);
+		if(ch=='\0') t = makeEOFTok(EOF);
 		else if(whiteSp.contains(ch)) state = State.WHITESPACE;
 		else if(opBegs.contains(ch)) state = State.OPERATOR; 
 		else if(sepBegs.contains(ch)) state = State.SEPARATOR;
@@ -227,6 +227,10 @@ public class Scanner {
 	} catch (Exception e){
 	    e.printStackTrace();
 	}
+    }
+
+    private Token makeEOFTok(Kind typ){
+	return tStream.new Token(typ,begOffset,index-1,lineNum);
     }
 
     private Token makeDefaTok(Kind typ){
