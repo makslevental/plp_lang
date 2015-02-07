@@ -17,8 +17,8 @@ public class Scanner {
     public static final Set<Character> opBegs = new HashSet<Character>(Arrays.asList('=' , '|' , '&' , '!' , '<' , '>' , '+' , '-' , '*' , '/' , '%' , '@'));
     public static final Set<Character> whiteSp = new HashSet<Character>(Arrays.asList('\n','\t','\r',' '));
 
-    public static final String[] keywordStrs = {"int","string","boolean","import","class","def","while","if","else","return","print","true","false","null"};
-    public static final Kind[] keywordKnds = {KW_INT, KW_STRING, KW_BOOLEAN, KW_IMPORT, KW_CLASS, KW_DEF, KW_WHILE, KW_IF, KW_ELSE, KW_RETURN, KW_PRINT,BL_TRUE, BL_FALSE,NL_NULL,};
+    public static final String[] keywordStrs = {"int","string","boolean","import","class","def","while","if","else","return","print","true","false","null","size","key","value"};
+    public static final Kind[] keywordKnds = {KW_INT, KW_STRING, KW_BOOLEAN, KW_IMPORT, KW_CLASS, KW_DEF, KW_WHILE, KW_IF, KW_ELSE, KW_RETURN, KW_PRINT,BL_TRUE, BL_FALSE,NL_NULL,KW_SIZE,KW_KEY,KW_VALUE};
     public static final Map<String,Kind> keywords;
     static{
 	keywords = new HashMap<String,Kind>();
