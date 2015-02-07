@@ -126,6 +126,7 @@ public class Scanner {
 			t = makePeekTok(DIV);//tStream.new Token(DIV, begOffset, --index, lineNum);
 		}
 		else if(ch=='%') t = makeDefaTok(MOD);
+		else if(ch=='&') t = makeDefaTok(AND);
 		else t = makeDefaTok(AT);
 		break;
 	    case SEPARATOR:
@@ -207,6 +208,9 @@ public class Scanner {
 		    if(ch=='\0'){
 			t = makeDefaTok(UNTERMINATED_STRING);
 			return t;
+		    }
+		    else if(ch=='\\'){
+			getch(); //eat following char too
 		    }
 		t = makeDefaTok(STRING_LIT);
 	    default:
