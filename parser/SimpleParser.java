@@ -62,7 +62,7 @@ public class SimpleParser {
     public static final Set<Kind> fctrPredSt = new HashSet<Kind>(Arrays.asList(IDENT,INT_LIT,BL_TRUE,BL_FALSE,STRING_LIT,LPAREN,NOT,MINUS,KW_SIZE,KW_KEY,KW_VALUE,LCURLY,AT));
     public static final Set<Kind> relOpPredSt = new HashSet<Kind>(Arrays.asList(BAR,AND,EQUAL,NOTEQUAL,LT,GT,LE,GE));
     public static final Set<Kind> stmtPredSt = new HashSet<Kind>(Arrays.asList(IDENT,KW_PRINT,KW_WHILE,KW_IF,MOD,KW_RETURN,SEMICOLON));
-    public static final int DEBUGMAXPARSER = 1;
+    public static final int DEBUGMAXPARSER = 0;
 				
     @SuppressWarnings("serial")
     public class SyntaxException extends Exception {
