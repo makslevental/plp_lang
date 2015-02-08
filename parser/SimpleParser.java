@@ -193,7 +193,7 @@ public class SimpleParser {
 	match(LCURLY);
 	while(isKind(KW_DEF) || isInPredSt(stmtPredSt)){
 	    if(isKind(KW_DEF)){
-		Decalaration();
+		Declaration();
 		match(SEMICOLON);
 	    }
 	    else {
@@ -235,17 +235,11 @@ public class SimpleParser {
     }
 
 
-    private void Decalaration() throws SyntaxException {
+    private void Declaration() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("declaration");
 	match(KW_DEF);
-	DecHead();	
-    }
-
-    private void DecHead() throws SyntaxException {
-	if(DEBUGMAXPARSER==1) System.out.println("decheaddown");
 	match(IDENT);
-	DecTail();
-	if(DEBUGMAXPARSER==1) System.out.println("decheadup");
+	DecTail();	
     }
 
     private void DecTail() throws SyntaxException {
@@ -256,13 +250,7 @@ public class SimpleParser {
 	}
 	else if(isKind(COLON)){
 	    match(COLON);
-	    if(isKind(AT))
-		CompositeValueType();
-	    else
-		SimpleType();
-	}
-	else if(isKind(KW_INT)||isKind(KW_BOOLEAN)||isKind(KW_STRING)){
-	    SimpleType();
+	    Type();
 	}
 	else{
 	    if(DEBUGMAXPARSER==1) System.out.println("dectailup");
@@ -324,13 +312,7 @@ public class SimpleParser {
 	if(DEBUGMAXPARSER==1) System.out.println("compositevaluetypeup");
 	    
     }
-    // private void ClosureDec() throws SyntaxException {
-    // 	if(DEBUGMAXPARSER==1) System.out.println("closuredecdown");
-    // 	match(IDENT);
-    // 	match(ASSIGN);
-    // 	Closure();
-    // 	if(DEBUGMAXPARSER==1) System.out.println("closuredecup");
-    // }
+
     private void Closure() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("closuredown");
 	match(LCURLY);
@@ -381,43 +363,32 @@ public class SimpleParser {
 	    match(LPAREN);
 	    Expression();
 	    match(RPAREN);
-	    Block();
 	}
+	Block();
 	if(DEBUGMAXPARSER==1) System.out.println("whiledown");
     }
+    // *(<Expression>) or *(<Expression>..<Expression>)
     private void WhileStar() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("whilestardown");
 	match(TIMES);
 	match(LPAREN);
 	Expression();
-	WhileStarExprTail();
-	if(DEBUGMAXPARSER==1) System.out.println("whilestarup");
-    }
-
-    private void WhileStarExprTail() throws SyntaxException {
-	if(DEBUGMAXPARSER==1) System.out.println("whilestarexprtaildown");
-	if(isKind(RANGE))
-	    RangeExprTail();
+	if(isKind(RANGE)){
+	    match(RANGE);
+	    Expression();
+	}
 	match(RPAREN);
-	Block();
-	if(DEBUGMAXPARSER==1) System.out.println("whilestarexprtailup");
-    }
-
-    private void RangeExprTail() throws SyntaxException {
-	if(DEBUGMAXPARSER==1) System.out.println("rangeexprtaildown");
-	match(RANGE);
-	Expression();
-	if(DEBUGMAXPARSER==1) System.out.println("rangeexprtailup");
+	if(DEBUGMAXPARSER==1) System.out.println("whilestarup");
     }
 
     private void LValue() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("lvaluedown");
 	match(IDENT);
 	if(isKind(LSQUARE))
-	    LRValue();	
+	    LValueTail();	
 	if(DEBUGMAXPARSER==1) System.out.println("lvalueup");
     }
-    private void LRValue() throws SyntaxException {
+    private void LValueTail() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("lrvaluedown");
 	match(LSQUARE);
 	ExpressionList();
@@ -455,13 +426,13 @@ public class SimpleParser {
 	Expression();
 	if(DEBUGMAXPARSER==1) System.out.println("keyvalueexpressiondown");
     }
-    private void RangeExpr() throws SyntaxException {
-	if(DEBUGMAXPARSER==1) System.out.println("rangeexprdown");
-	Expression();
-	match(RANGE);
-	Expression();
-	if(DEBUGMAXPARSER==1) System.out.println("rangeexprup");
-    }
+    // private void RangeExpr() throws SyntaxException {
+    // 	if(DEBUGMAXPARSER==1) System.out.println("rangeexprdown");
+    // 	Expression();
+    // 	match(RANGE);
+    // 	Expression();
+    // 	if(DEBUGMAXPARSER==1) System.out.println("rangeexprup");
+    // }
     private void Expression() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("expressiondown");
 	Term();
@@ -553,13 +524,14 @@ public class SimpleParser {
 
     private void List() throws SyntaxException {
 	match(AT);
+	// <MapList> i.e. @@[ <KeyValueList> ]
 	if(isKind(AT)){
 	    match(AT);
 	    match(LSQUARE);
 	    KeyValueList();
 	    match(RSQUARE);
 	}
-	else{
+	else{// <List> i.e. @[ <ExpressionList> ]
 	    match(LSQUARE);
 	    ExpressionList();
 	    match(RSQUARE);
