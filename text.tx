@@ -1,0 +1,1710 @@
+JUnit version 4.12
+.closureEva
+class A  { x[z] = a(1,2,3); } 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,9,10,1>
+<IDENT,x,11,12,1>
+<LSQUARE,[,12,13,1>
+<IDENT,z,13,14,1>
+<RSQUARE,],14,15,1>
+<ASSIGN,=,16,17,1>
+<IDENT,a,18,19,1>
+<LPAREN,(,19,20,1>
+<INT_LIT,1,20,21,1>
+<COMMA,,,21,22,1>
+<INT_LIT,2,22,23,1>
+<COMMA,,,23,24,1>
+<INT_LIT,3,24,25,1>
+<RPAREN,),25,26,1>
+<SEMICOLON,;,26,27,1>
+<RCURLY,},28,29,1>
+<EOF,,30,30,1>
+
+E.def_key_value_type1
+class A {def C:@[string]; def S:@@[int:boolean];} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<COLON,:,14,15,1>
+<AT,@,15,16,1>
+<LSQUARE,[,16,17,1>
+<KW_STRING,string,17,23,1>
+<RSQUARE,],23,24,1>
+<SEMICOLON,;,24,25,1>
+<KW_DEF,def,26,29,1>
+<IDENT,S,30,31,1>
+<COLON,:,31,32,1>
+<AT,@,32,33,1>
+<AT,@,33,34,1>
+<LSQUARE,[,34,35,1>
+<KW_INT,int,35,38,1>
+<COLON,:,38,39,1>
+<KW_BOOLEAN,boolean,39,46,1>
+<RSQUARE,],46,47,1>
+<SEMICOLON,;,47,48,1>
+<RCURLY,},48,49,1>
+<EOF,,50,50,1>
+
+E.def_key_value_type1
+class A {def C:@[string]; def S:@@[int:@@[string:boolean]];} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<COLON,:,14,15,1>
+<AT,@,15,16,1>
+<LSQUARE,[,16,17,1>
+<KW_STRING,string,17,23,1>
+<RSQUARE,],23,24,1>
+<SEMICOLON,;,24,25,1>
+<KW_DEF,def,26,29,1>
+<IDENT,S,30,31,1>
+<COLON,:,31,32,1>
+<AT,@,32,33,1>
+<AT,@,33,34,1>
+<LSQUARE,[,34,35,1>
+<KW_INT,int,35,38,1>
+<COLON,:,38,39,1>
+<AT,@,39,40,1>
+<AT,@,40,41,1>
+<LSQUARE,[,41,42,1>
+<KW_STRING,string,42,48,1>
+<COLON,:,48,49,1>
+<KW_BOOLEAN,boolean,49,56,1>
+<RSQUARE,],56,57,1>
+<RSQUARE,],57,58,1>
+<SEMICOLON,;,58,59,1>
+<RCURLY,},59,60,1>
+<EOF,,61,61,1>
+
+E.factor1
+class A {def C={->x=y;};} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<ASSIGN,=,14,15,1>
+<LCURLY,{,15,16,1>
+<ARROW,->,16,18,1>
+<IDENT,x,18,19,1>
+<ASSIGN,=,19,20,1>
+<IDENT,y,20,21,1>
+<SEMICOLON,;,21,22,1>
+<RCURLY,},22,23,1>
+<SEMICOLON,;,23,24,1>
+<RCURLY,},24,25,1>
+<EOF,,26,26,1>
+
+E.factor2
+class A {def C={->x=y[z];};  def D={->x=y[1];};} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<ASSIGN,=,14,15,1>
+<LCURLY,{,15,16,1>
+<ARROW,->,16,18,1>
+<IDENT,x,18,19,1>
+<ASSIGN,=,19,20,1>
+<IDENT,y,20,21,1>
+<LSQUARE,[,21,22,1>
+<IDENT,z,22,23,1>
+<RSQUARE,],23,24,1>
+<SEMICOLON,;,24,25,1>
+<RCURLY,},25,26,1>
+<SEMICOLON,;,26,27,1>
+<KW_DEF,def,29,32,1>
+<IDENT,D,33,34,1>
+<ASSIGN,=,34,35,1>
+<LCURLY,{,35,36,1>
+<ARROW,->,36,38,1>
+<IDENT,x,38,39,1>
+<ASSIGN,=,39,40,1>
+<IDENT,y,40,41,1>
+<LSQUARE,[,41,42,1>
+<INT_LIT,1,42,43,1>
+<RSQUARE,],43,44,1>
+<SEMICOLON,;,44,45,1>
+<RCURLY,},45,46,1>
+<SEMICOLON,;,46,47,1>
+<RCURLY,},47,48,1>
+<EOF,,49,49,1>
+
+E.factor3
+class A {def C={->x=3;};} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<ASSIGN,=,14,15,1>
+<LCURLY,{,15,16,1>
+<ARROW,->,16,18,1>
+<IDENT,x,18,19,1>
+<ASSIGN,=,19,20,1>
+<INT_LIT,3,20,21,1>
+<SEMICOLON,;,21,22,1>
+<RCURLY,},22,23,1>
+<SEMICOLON,;,23,24,1>
+<RCURLY,},24,25,1>
+<EOF,,26,26,1>
+
+E.factor4
+class A {def C={->x="hello";};} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<ASSIGN,=,14,15,1>
+<LCURLY,{,15,16,1>
+<ARROW,->,16,18,1>
+<IDENT,x,18,19,1>
+<ASSIGN,=,19,20,1>
+<STRING_LIT,hello,20,27,1>
+<SEMICOLON,;,27,28,1>
+<RCURLY,},28,29,1>
+<SEMICOLON,;,29,30,1>
+<RCURLY,},30,31,1>
+<EOF,,32,32,1>
+
+E.factor5
+class A {def C={->x=true; z = false;};} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<ASSIGN,=,14,15,1>
+<LCURLY,{,15,16,1>
+<ARROW,->,16,18,1>
+<IDENT,x,18,19,1>
+<ASSIGN,=,19,20,1>
+<BL_TRUE,true,20,24,1>
+<SEMICOLON,;,24,25,1>
+<IDENT,z,26,27,1>
+<ASSIGN,=,28,29,1>
+<BL_FALSE,false,30,35,1>
+<SEMICOLON,;,35,36,1>
+<RCURLY,},36,37,1>
+<SEMICOLON,;,37,38,1>
+<RCURLY,},38,39,1>
+<EOF,,40,40,1>
+
+E.factor6
+class A {def C={->x=-y; z = !y;};} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<ASSIGN,=,14,15,1>
+<LCURLY,{,15,16,1>
+<ARROW,->,16,18,1>
+<IDENT,x,18,19,1>
+<ASSIGN,=,19,20,1>
+<MINUS,-,20,21,1>
+<IDENT,y,21,22,1>
+<SEMICOLON,;,22,23,1>
+<IDENT,z,24,25,1>
+<ASSIGN,=,26,27,1>
+<NOT,!,28,29,1>
+<IDENT,y,29,30,1>
+<SEMICOLON,;,30,31,1>
+<RCURLY,},31,32,1>
+<SEMICOLON,;,32,33,1>
+<RCURLY,},33,34,1>
+<EOF,,35,35,1>
+
+E.factor7
+class A {def C={->x= &y; z = !y;};} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<ASSIGN,=,14,15,1>
+<LCURLY,{,15,16,1>
+<ARROW,->,16,18,1>
+<IDENT,x,18,19,1>
+<ASSIGN,=,19,20,1>
+<AND,&,21,22,1>
+<IDENT,y,22,23,1>
+<SEMICOLON,;,23,24,1>
+<IDENT,z,25,26,1>
+<ASSIGN,=,27,28,1>
+<NOT,!,29,30,1>
+<IDENT,y,30,31,1>
+<SEMICOLON,;,31,32,1>
+<RCURLY,},32,33,1>
+<SEMICOLON,;,33,34,1>
+<RCURLY,},34,35,1>
+<EOF,,36,36,1>
+
+E.def_simple_type1
+class A {def B:int; def C:boolean; def S: string;} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,B,13,14,1>
+<COLON,:,14,15,1>
+<KW_INT,int,15,18,1>
+<SEMICOLON,;,18,19,1>
+<KW_DEF,def,20,23,1>
+<IDENT,C,24,25,1>
+<COLON,:,25,26,1>
+<KW_BOOLEAN,boolean,26,33,1>
+<SEMICOLON,;,33,34,1>
+<KW_DEF,def,35,38,1>
+<IDENT,S,39,40,1>
+<COLON,:,40,41,1>
+<KW_STRING,string,42,48,1>
+<SEMICOLON,;,48,49,1>
+<RCURLY,},49,50,1>
+<EOF,,51,51,1>
+
+E.def_simple_type2
+class A {def B:int; def C:boolean; def S: string} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,B,13,14,1>
+<COLON,:,14,15,1>
+<KW_INT,int,15,18,1>
+<SEMICOLON,;,18,19,1>
+<KW_DEF,def,20,23,1>
+<IDENT,C,24,25,1>
+<COLON,:,25,26,1>
+<KW_BOOLEAN,boolean,26,33,1>
+<SEMICOLON,;,33,34,1>
+<KW_DEF,def,35,38,1>
+<IDENT,S,39,40,1>
+<COLON,:,40,41,1>
+<KW_STRING,string,42,48,1>
+<RCURLY,},48,49,1>
+<EOF,,50,50,1>
+
+E.emptyStatement
+class A  { ;;; } 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,9,10,1>
+<SEMICOLON,;,11,12,1>
+<SEMICOLON,;,12,13,1>
+<SEMICOLON,;,13,14,1>
+<RCURLY,},15,16,1>
+<EOF,,17,17,1>
+
+E.list1
+class A  { 
+ x = @[a,b,c]; 
+ y = @[d,e,f]+x; 
+ } 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,9,10,1>
+<IDENT,x,13,14,2>
+<ASSIGN,=,15,16,2>
+<AT,@,17,18,2>
+<LSQUARE,[,18,19,2>
+<IDENT,a,19,20,2>
+<COMMA,,,20,21,2>
+<IDENT,b,21,22,2>
+<COMMA,,,22,23,2>
+<IDENT,c,23,24,2>
+<RSQUARE,],24,25,2>
+<SEMICOLON,;,25,26,2>
+<IDENT,y,29,30,3>
+<ASSIGN,=,31,32,3>
+<AT,@,33,34,3>
+<LSQUARE,[,34,35,3>
+<IDENT,d,35,36,3>
+<COMMA,,,36,37,3>
+<IDENT,e,37,38,3>
+<COMMA,,,38,39,3>
+<IDENT,f,39,40,3>
+<RSQUARE,],40,41,3>
+<PLUS,+,41,42,3>
+<IDENT,x,42,43,3>
+<SEMICOLON,;,43,44,3>
+<RCURLY,},47,48,4>
+<EOF,,49,49,4>
+
+E.maplist1
+class A  { x = @@[x:y]; y = @@[x:y,4:5]; } 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,9,10,1>
+<IDENT,x,11,12,1>
+<ASSIGN,=,13,14,1>
+<AT,@,15,16,1>
+<AT,@,16,17,1>
+<LSQUARE,[,17,18,1>
+<IDENT,x,18,19,1>
+<COLON,:,19,20,1>
+<IDENT,y,20,21,1>
+<RSQUARE,],21,22,1>
+<SEMICOLON,;,22,23,1>
+<IDENT,y,24,25,1>
+<ASSIGN,=,26,27,1>
+<AT,@,28,29,1>
+<AT,@,29,30,1>
+<LSQUARE,[,30,31,1>
+<IDENT,x,31,32,1>
+<COLON,:,32,33,1>
+<IDENT,y,33,34,1>
+<COMMA,,,34,35,1>
+<INT_LIT,4,35,36,1>
+<COLON,:,36,37,1>
+<INT_LIT,5,37,38,1>
+<RSQUARE,],38,39,1>
+<SEMICOLON,;,39,40,1>
+<RCURLY,},41,42,1>
+<EOF,,43,43,1>
+
+E.almostEmpty
+class A { ] 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<RSQUARE,],10,11,1>
+<EOF,,12,12,1>
+
+.almostEmpty
+class A { } 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<RCURLY,},10,11,1>
+<EOF,,12,12,1>
+
+.expressions1
+class A {def C={->x=x+1; z = 3-4-5;};} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<ASSIGN,=,14,15,1>
+<LCURLY,{,15,16,1>
+<ARROW,->,16,18,1>
+<IDENT,x,18,19,1>
+<ASSIGN,=,19,20,1>
+<IDENT,x,20,21,1>
+<PLUS,+,21,22,1>
+<INT_LIT,1,22,23,1>
+<SEMICOLON,;,23,24,1>
+<IDENT,z,25,26,1>
+<ASSIGN,=,27,28,1>
+<INT_LIT,3,29,30,1>
+<MINUS,-,30,31,1>
+<INT_LIT,4,31,32,1>
+<MINUS,-,32,33,1>
+<INT_LIT,5,33,34,1>
+<SEMICOLON,;,34,35,1>
+<RCURLY,},35,36,1>
+<SEMICOLON,;,36,37,1>
+<RCURLY,},37,38,1>
+<EOF,,39,39,1>
+
+E.expressions2
+class A {def C={->x=x+1/2*3--4; z = 3-4-5;};} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<ASSIGN,=,14,15,1>
+<LCURLY,{,15,16,1>
+<ARROW,->,16,18,1>
+<IDENT,x,18,19,1>
+<ASSIGN,=,19,20,1>
+<IDENT,x,20,21,1>
+<PLUS,+,21,22,1>
+<INT_LIT,1,22,23,1>
+<DIV,/,23,24,1>
+<INT_LIT,2,24,25,1>
+<TIMES,*,25,26,1>
+<INT_LIT,3,26,27,1>
+<MINUS,-,27,28,1>
+<MINUS,-,28,29,1>
+<INT_LIT,4,29,30,1>
+<SEMICOLON,;,30,31,1>
+<IDENT,z,32,33,1>
+<ASSIGN,=,34,35,1>
+<INT_LIT,3,36,37,1>
+<MINUS,-,37,38,1>
+<INT_LIT,4,38,39,1>
+<MINUS,-,39,40,1>
+<INT_LIT,5,40,41,1>
+<SEMICOLON,;,41,42,1>
+<RCURLY,},42,43,1>
+<SEMICOLON,;,43,44,1>
+<RCURLY,},44,45,1>
+<EOF,,46,46,1>
+
+E.expressions3
+class A {def C={->x=x+1/2*3--4; z = 3-4-5;};} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<ASSIGN,=,14,15,1>
+<LCURLY,{,15,16,1>
+<ARROW,->,16,18,1>
+<IDENT,x,18,19,1>
+<ASSIGN,=,19,20,1>
+<IDENT,x,20,21,1>
+<PLUS,+,21,22,1>
+<INT_LIT,1,22,23,1>
+<DIV,/,23,24,1>
+<INT_LIT,2,24,25,1>
+<TIMES,*,25,26,1>
+<INT_LIT,3,26,27,1>
+<MINUS,-,27,28,1>
+<MINUS,-,28,29,1>
+<INT_LIT,4,29,30,1>
+<SEMICOLON,;,30,31,1>
+<IDENT,z,32,33,1>
+<ASSIGN,=,34,35,1>
+<INT_LIT,3,36,37,1>
+<MINUS,-,37,38,1>
+<INT_LIT,4,38,39,1>
+<MINUS,-,39,40,1>
+<INT_LIT,5,40,41,1>
+<SEMICOLON,;,41,42,1>
+<RCURLY,},42,43,1>
+<SEMICOLON,;,43,44,1>
+<RCURLY,},44,45,1>
+<EOF,,46,46,1>
+
+E.expressions4
+class A {x = a<<b; c = b>>z;} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<IDENT,x,9,10,1>
+<ASSIGN,=,11,12,1>
+<IDENT,a,13,14,1>
+<LSHIFT,<<,14,16,1>
+<IDENT,b,16,17,1>
+<SEMICOLON,;,17,18,1>
+<IDENT,c,19,20,1>
+<ASSIGN,=,21,22,1>
+<IDENT,b,23,24,1>
+<RSHIFT,>>,24,26,1>
+<IDENT,z,26,27,1>
+<SEMICOLON,;,27,28,1>
+<RCURLY,},28,29,1>
+<EOF,,30,30,1>
+
+E.def_closure1
+class A {def C={->};} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<ASSIGN,=,14,15,1>
+<LCURLY,{,15,16,1>
+<ARROW,->,16,18,1>
+<RCURLY,},18,19,1>
+<SEMICOLON,;,19,20,1>
+<RCURLY,},20,21,1>
+<EOF,,22,22,1>
+
+E.def_closure2
+class A {def C={->};  def z:string;} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<KW_DEF,def,9,12,1>
+<IDENT,C,13,14,1>
+<ASSIGN,=,14,15,1>
+<LCURLY,{,15,16,1>
+<ARROW,->,16,18,1>
+<RCURLY,},18,19,1>
+<SEMICOLON,;,19,20,1>
+<KW_DEF,def,22,25,1>
+<IDENT,z,26,27,1>
+<COLON,:,27,28,1>
+<KW_STRING,string,28,34,1>
+<SEMICOLON,;,34,35,1>
+<RCURLY,},35,36,1>
+<EOF,,37,37,1>
+
+E.statements1
+class A {x = y; z[1] = b; print a+b; print (x+y-z);} 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,8,9,1>
+<IDENT,x,9,10,1>
+<ASSIGN,=,11,12,1>
+<IDENT,y,13,14,1>
+<SEMICOLON,;,14,15,1>
+<IDENT,z,16,17,1>
+<LSQUARE,[,17,18,1>
+<INT_LIT,1,18,19,1>
+<RSQUARE,],19,20,1>
+<ASSIGN,=,21,22,1>
+<IDENT,b,23,24,1>
+<SEMICOLON,;,24,25,1>
+<KW_PRINT,print,26,31,1>
+<IDENT,a,32,33,1>
+<PLUS,+,33,34,1>
+<IDENT,b,34,35,1>
+<SEMICOLON,;,35,36,1>
+<KW_PRINT,print,37,42,1>
+<LPAREN,(,43,44,1>
+<IDENT,x,44,45,1>
+<PLUS,+,45,46,1>
+<IDENT,y,46,47,1>
+<MINUS,-,47,48,1>
+<IDENT,z,48,49,1>
+<RPAREN,),49,50,1>
+<SEMICOLON,;,50,51,1>
+<RCURLY,},51,52,1>
+<EOF,,53,53,1>
+
+E.statements2
+class A  {
+ while (x) {};  
+ while* (1..4){}; } 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,9,10,1>
+<KW_WHILE,while,12,17,2>
+<LPAREN,(,18,19,2>
+<IDENT,x,19,20,2>
+<RPAREN,),20,21,2>
+<LCURLY,{,22,23,2>
+<RCURLY,},23,24,2>
+<SEMICOLON,;,24,25,2>
+<KW_WHILE,while,29,34,3>
+<TIMES,*,34,35,3>
+<LPAREN,(,36,37,3>
+<INT_LIT,1,37,38,3>
+<RANGE,..,38,40,3>
+<INT_LIT,4,40,41,3>
+<RPAREN,),41,42,3>
+<LCURLY,{,42,43,3>
+<RCURLY,},43,44,3>
+<SEMICOLON,;,44,45,3>
+<RCURLY,},46,47,3>
+<EOF,,48,48,3>
+
+E.statements3
+class A  {
+ if (x) {};  
+ if (y){} else {}; 
+ if (x) {} else {if (z) {} else {};} ; } 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,9,10,1>
+<KW_IF,if,12,14,2>
+<LPAREN,(,15,16,2>
+<IDENT,x,16,17,2>
+<RPAREN,),17,18,2>
+<LCURLY,{,19,20,2>
+<RCURLY,},20,21,2>
+<SEMICOLON,;,21,22,2>
+<KW_IF,if,26,28,3>
+<LPAREN,(,29,30,3>
+<IDENT,y,30,31,3>
+<RPAREN,),31,32,3>
+<LCURLY,{,32,33,3>
+<RCURLY,},33,34,3>
+<KW_ELSE,else,35,39,3>
+<LCURLY,{,40,41,3>
+<RCURLY,},41,42,3>
+<SEMICOLON,;,42,43,3>
+<KW_IF,if,46,48,4>
+<LPAREN,(,49,50,4>
+<IDENT,x,50,51,4>
+<RPAREN,),51,52,4>
+<LCURLY,{,53,54,4>
+<RCURLY,},54,55,4>
+<KW_ELSE,else,56,60,4>
+<LCURLY,{,61,62,4>
+<KW_IF,if,62,64,4>
+<LPAREN,(,65,66,4>
+<IDENT,z,66,67,4>
+<RPAREN,),67,68,4>
+<LCURLY,{,69,70,4>
+<RCURLY,},70,71,4>
+<KW_ELSE,else,72,76,4>
+<LCURLY,{,77,78,4>
+<RCURLY,},78,79,4>
+<SEMICOLON,;,79,80,4>
+<RCURLY,},80,81,4>
+<SEMICOLON,;,82,83,4>
+<RCURLY,},84,85,4>
+<EOF,,86,86,4>
+
+E.statements4
+class A  { %a(1,2,3); } 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,9,10,1>
+<MOD,%,11,12,1>
+<IDENT,a,12,13,1>
+<LPAREN,(,13,14,1>
+<INT_LIT,1,14,15,1>
+<COMMA,,,15,16,1>
+<INT_LIT,2,16,17,1>
+<COMMA,,,17,18,1>
+<INT_LIT,3,18,19,1>
+<RPAREN,),19,20,1>
+<SEMICOLON,;,20,21,1>
+<RCURLY,},22,23,1>
+<EOF,,24,24,1>
+
+E.statements5
+class A  { x = a(1,2,3); } 
+<KW_CLASS,class,0,5,1>
+<IDENT,A,6,7,1>
+<LCURLY,{,9,10,1>
+<IDENT,x,11,12,1>
+<ASSIGN,=,13,14,1>
+<IDENT,a,15,16,1>
+<LPAREN,(,16,17,1>
+<INT_LIT,1,17,18,1>
+<COMMA,,,18,19,1>
+<INT_LIT,2,19,20,1>
+<COMMA,,,20,21,1>
+<INT_LIT,3,21,22,1>
+<RPAREN,),22,23,1>
+<SEMICOLON,;,23,24,1>
+<RCURLY,},25,26,1>
+<EOF,,27,27,1>
+
+E.import1
+import X; class A { } 
+<KW_IMPORT,import,0,6,1>
+<IDENT,X,7,8,1>
+<SEMICOLON,;,8,9,1>
+<KW_CLASS,class,10,15,1>
+<IDENT,A,16,17,1>
+<LCURLY,{,18,19,1>
+<RCURLY,},20,21,1>
+<EOF,,22,22,1>
+
+.import2
+import X.Y.Z; import W.X.Y; class A { } 
+<KW_IMPORT,import,0,6,1>
+<IDENT,X,7,8,1>
+<DOT,.,8,9,1>
+<IDENT,Y,9,10,1>
+<DOT,.,10,11,1>
+<IDENT,Z,11,12,1>
+<SEMICOLON,;,12,13,1>
+<KW_IMPORT,import,14,20,1>
+<IDENT,W,21,22,1>
+<DOT,.,22,23,1>
+<IDENT,X,23,24,1>
+<DOT,.,24,25,1>
+<IDENT,Y,25,26,1>
+<SEMICOLON,;,26,27,1>
+<KW_CLASS,class,28,33,1>
+<IDENT,A,34,35,1>
+<LCURLY,{,36,37,1>
+<RCURLY,},38,39,1>
+<EOF,,40,40,1>
+
+.import2
+import class A { } 
+<KW_IMPORT,import,0,6,1>
+<KW_CLASS,class,7,12,1>
+<IDENT,A,13,14,1>
+<LCURLY,{,15,16,1>
+<RCURLY,},17,18,1>
+<EOF,,19,19,1>
+
+
+Time: 0.026
+There were 26 failures:
+1) closureEval(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <LSQUARE,[,12,13,1> . Expected: EQUAL 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Statement(SimpleParser.java:204)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:193)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.closureEval(TestSimpleParser.java:284)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+2) def_key_value_type1(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.def_key_value_type1(TestSimpleParser.java:114)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+3) def_key_value_type2(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.def_key_value_type2(TestSimpleParser.java:122)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+4) factor1(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.factor1(TestSimpleParser.java:146)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+5) factor2(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.factor2(TestSimpleParser.java:155)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+6) factor3(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.factor3(TestSimpleParser.java:163)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+7) factor4(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.factor4(TestSimpleParser.java:171)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+8) factor5(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.factor5(TestSimpleParser.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+9) factor6(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.factor6(TestSimpleParser.java:188)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+10) factor7(cop5555sp15.TestSimpleParser)
+java.lang.AssertionError: expected:<AND> but was:<KW_DEF>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:834)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at cop5555sp15.TestSimpleParser.parseIncorrectInput(TestSimpleParser.java:24)
+	at cop5555sp15.TestSimpleParser.factor7(TestSimpleParser.java:196)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+11) def_simple_type1(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.def_simple_type1(TestSimpleParser.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+12) def_simple_type2(cop5555sp15.TestSimpleParser)
+java.lang.AssertionError: expected:<RCURLY> but was:<KW_DEF>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:834)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at cop5555sp15.TestSimpleParser.parseIncorrectInput(TestSimpleParser.java:24)
+	at cop5555sp15.TestSimpleParser.def_simple_type2(TestSimpleParser.java:106)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+13) emptyStatement(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <SEMICOLON,;,11,12,1> . Expected: RCURLY 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:198)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.emptyStatement(TestSimpleParser.java:260)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+14) list1(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <ASSIGN,=,15,16,2> . Expected: EQUAL 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Statement(SimpleParser.java:204)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:193)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.list1(TestSimpleParser.java:292)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+15) maplist1(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <ASSIGN,=,13,14,1> . Expected: EQUAL 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Statement(SimpleParser.java:204)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:193)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.maplist1(TestSimpleParser.java:300)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+16) expressions1(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.expressions1(TestSimpleParser.java:204)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+17) expressions2(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.expressions2(TestSimpleParser.java:212)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+18) expressions3(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.expressions3(TestSimpleParser.java:220)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+19) expressions4(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <ASSIGN,=,11,12,1> . Expected: EQUAL 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Statement(SimpleParser.java:204)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:193)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.expressions4(TestSimpleParser.java:228)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+20) def_closure1(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.def_closure1(TestSimpleParser.java:130)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+21) def_closure2(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <KW_DEF,def,9,12,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:190)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.def_closure2(TestSimpleParser.java:138)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+22) statements1(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <ASSIGN,=,11,12,1> . Expected: EQUAL 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Statement(SimpleParser.java:204)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:193)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.statements1(TestSimpleParser.java:236)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+23) statements2(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <IDENT,x,19,20,2> . Expected: RPAREN 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.While(SimpleParser.java:278)
+	at cop5555sp15.SimpleParser.Statement(SimpleParser.java:212)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:193)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.statements2(TestSimpleParser.java:244)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+24) statements3(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <IDENT,x,16,17,2> . Expected: RPAREN 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.If(SimpleParser.java:261)
+	at cop5555sp15.SimpleParser.Statement(SimpleParser.java:214)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:193)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.statements3(TestSimpleParser.java:252)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+25) statements4(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <IDENT,a,12,13,1> . Expected: SEMICOLON 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:194)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.statements4(TestSimpleParser.java:268)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+26) statements5(cop5555sp15.TestSimpleParser)
+cop5555sp15.SimpleParser$SyntaxException:  error at token <ASSIGN,=,13,14,1> . Expected: EQUAL 
+	at cop5555sp15.SimpleParser.match(SimpleParser.java:115)
+	at cop5555sp15.SimpleParser.Statement(SimpleParser.java:204)
+	at cop5555sp15.SimpleParser.Block(SimpleParser.java:193)
+	at cop5555sp15.SimpleParser.Program(SimpleParser.java:169)
+	at cop5555sp15.SimpleParser.parse(SimpleParser.java:161)
+	at cop5555sp15.TestSimpleParser.parseCorrectInput(TestSimpleParser.java:34)
+	at cop5555sp15.TestSimpleParser.statements5(TestSimpleParser.java:276)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:27)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at org.junit.runner.JUnitCore.runMain(JUnitCore.java:77)
+	at org.junit.runner.JUnitCore.main(JUnitCore.java:36)
+
+FAILURES!!!
+Tests run: 31,  Failures: 26
+
