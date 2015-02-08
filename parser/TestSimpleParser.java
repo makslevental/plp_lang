@@ -112,7 +112,8 @@ public class TestSimpleParser {
 		String input = "class A {def C:@[string]; def S:@@[int:boolean];} ";
 		System.out.println(input);
 		parseCorrectInput(input);
-	}	
+	}
+    
 	
 	@Test
 	public void def_key_value_type2() throws SyntaxException {
@@ -120,7 +121,8 @@ public class TestSimpleParser {
 		String input = "class A {def C:@[string]; def S:@@[int:@@[string:boolean]];} ";
 		System.out.println(input);
 		parseCorrectInput(input);
-	}	
+	}
+    
 	
 	@Test
 	public void def_closure1() throws SyntaxException {
@@ -258,7 +260,8 @@ public class TestSimpleParser {
 		String input = "class A  { ;;; } ";
 		System.out.println(input);
 		parseCorrectInput(input);
-	} 	
+	} 
+    
 	
 	@Test
 	public void statements4()throws SyntaxException {
@@ -282,7 +285,8 @@ public class TestSimpleParser {
 		String input = "class A  { x[z] = a(1,2,3); } ";
 		System.out.println(input);
 		parseCorrectInput(input);
-	} 	
+	} 
+    
 	
 	@Test
 	public void list1()throws SyntaxException {
@@ -290,7 +294,8 @@ public class TestSimpleParser {
 		String input = "class A  { \n x = @[a,b,c]; \n y = @[d,e,f]+x; \n } ";
 		System.out.println(input);
 		parseCorrectInput(input);
-	} 	
+	} 
+    
 	
 	@Test
 	public void maplist1()throws SyntaxException {
@@ -298,5 +303,6 @@ public class TestSimpleParser {
 		String input = "class A  { x = @@[x:y]; y = @@[x:y,4:5]; } ";
 		System.out.println(input);
 		parseCorrectInput(input);
-	} 	
+	} 
+    
 }

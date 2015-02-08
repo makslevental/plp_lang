@@ -55,12 +55,14 @@ import static cop5555sp15.TokenStream.Kind.TIMES;
 import cop5555sp15.TokenStream.Kind;
 import cop5555sp15.TokenStream.Token;
 
+
+
 public class SimpleParser {
 
     public static final Set<Kind> fctrPredSt = new HashSet<Kind>(Arrays.asList(IDENT,INT_LIT,BL_TRUE,BL_FALSE,STRING_LIT,LPAREN,NOT,MINUS,KW_SIZE,KW_KEY,KW_VALUE,LCURLY,AT));
     public static final Set<Kind> relOpPredSt = new HashSet<Kind>(Arrays.asList(BAR,AND,EQUAL,NOTEQUAL,LT,GT,LE,GE));
-    public static final Set<Kind> stmtPredSt = new HashSet<Kind>(Arrays.asList(IDENT,KW_PRINT,KW_WHILE,KW_IF,MOD,KW_RETURN));
-								 
+    public static final Set<Kind> stmtPredSt = new HashSet<Kind>(Arrays.asList(IDENT,KW_PRINT,KW_WHILE,KW_IF,MOD,KW_RETURN,SEMICOLON));
+    public static final int DEBUGMAXPARSER = 1;
 				
     @SuppressWarnings("serial")
     public class SyntaxException extends Exception {
@@ -109,8 +111,9 @@ public class SimpleParser {
 
     private Kind match(Kind kind) throws SyntaxException {
 	if (isKind(kind)) {
+	    if(DEBUGMAXPARSER==1) System.out.println("***"+t.toString()+"***");
 	    consume();
-	    return kind;
+	    return kind;	    
 	}
 	throw new SyntaxException(t, kind);
     }
@@ -163,26 +166,30 @@ public class SimpleParser {
     }
 
     private void Program() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("programdown");
 	ImportList();
 	match(KW_CLASS);
 	match(IDENT);
 	Block();
+	if(DEBUGMAXPARSER==1) System.out.println("programup");
     }
 
     private void ImportList() throws SyntaxException {
-	while (isKind(KW_IMPORT))
-	    {
-		match(KW_IMPORT);
+	if(DEBUGMAXPARSER==1) System.out.println("importlistdown");
+	while (isKind(KW_IMPORT)){
+	    match(KW_IMPORT);
+	    match(IDENT);
+	    while(isKind(DOT)){
+		match(DOT);
 		match(IDENT);
-		while(isKind(DOT)){
-		    match(DOT);
-		    match(IDENT);
-		}
-		match(SEMICOLON);
 	    }
+	    match(SEMICOLON);
+	}
+	if(DEBUGMAXPARSER==1) System.out.println("importlistup");
     }
 
     private void Block() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("blockdown");
 	match(LCURLY);
 	while(isKind(KW_DEF) || isInPredSt(stmtPredSt)){
 	    if(isKind(KW_DEF)){
@@ -193,15 +200,16 @@ public class SimpleParser {
 		Statement();
 		match(SEMICOLON);
 	    }
-	}
-		   
+	}	   
 	match(RCURLY);
+	if(DEBUGMAXPARSER==1) System.out.println("blockup");
     }
 
     private void Statement() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("statementdown");
 	if(isKind(IDENT)){
 	    LValue();
-	    match(EQUAL);
+	    match(ASSIGN);
 	    Expression();
 	}
 	else if(isKind(KW_PRINT)){
@@ -220,55 +228,152 @@ public class SimpleParser {
 	    match(KW_RETURN);
 	    Expression();
 	}
-	else
+	else{
+	    if(DEBUGMAXPARSER==1) System.out.println("statementup");
 	    return;//epsilon
-	    
+	}
     }
 
 
     private void Decalaration() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("declaration");
+	match(KW_DEF);
+	DecHead();	
     }
+
+    private void DecHead() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("decheaddown");
+	match(IDENT);
+	DecTail();
+	if(DEBUGMAXPARSER==1) System.out.println("decheadup");
+    }
+
+    private void DecTail() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("dectaildown");
+	if(isKind(ASSIGN)){
+	    match(ASSIGN);
+	    Closure();
+	}
+	else if(isKind(COLON)){
+	    match(COLON);
+	    if(isKind(AT))
+		CompositeValueType();
+	    else
+		SimpleType();
+	}
+	else if(isKind(KW_INT)||isKind(KW_BOOLEAN)||isKind(KW_STRING)){
+	    SimpleType();
+	}
+	else{
+	    if(DEBUGMAXPARSER==1) System.out.println("dectailup");
+	    return;//epsilon
+	}
+    }
+
+
     private void VarDec() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("vardecdown");
+	match(IDENT);
+	if(isKind(SEMICOLON)){
+	    match(SEMICOLON);
+	    Type();
+	}
+	else{
+	    if(DEBUGMAXPARSER==1) System.out.println("vardecup");
+	    return;//epsilon
+	}
     }
 
 
     private void Type() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("typedown");
+	if(isKind(KW_INT)||isKind(KW_BOOLEAN)||isKind(KW_STRING))
+	   SimpleType();
+	else
+	    CompositeValueType();	   
+	if(DEBUGMAXPARSER==1) System.out.println("typeup");
     }
 
     private void SimpleType() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("simpletypedown");
+	if(isKind(KW_INT))
+	    match(KW_INT);
+	else if(isKind(KW_BOOLEAN))
+	    match(KW_BOOLEAN);
+	else
+	    match(KW_STRING);
+	if(DEBUGMAXPARSER==1) System.out.println("simpletypeup");
     }
 
-    private void ValueType() throws SyntaxException {
-	
+    private void CompositeValueType() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("compositevaluetypedown");
+	match(AT);
+	if(isKind(LSQUARE)){
+	    match(LSQUARE);
+	    Type();
+	    match(RSQUARE);
+	}
+	else{
+	    match(AT);
+	    match(LSQUARE);
+	    SimpleType();
+	    match(COLON);
+	    Type();
+	    match(RSQUARE);
+	}
+	if(DEBUGMAXPARSER==1) System.out.println("compositevaluetypeup");
+	    
     }
-    private void ClosureDec() throws SyntaxException {
-	
-    }
+    // private void ClosureDec() throws SyntaxException {
+    // 	if(DEBUGMAXPARSER==1) System.out.println("closuredecdown");
+    // 	match(IDENT);
+    // 	match(ASSIGN);
+    // 	Closure();
+    // 	if(DEBUGMAXPARSER==1) System.out.println("closuredecup");
+    // }
     private void Closure() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("closuredown");
+	match(LCURLY);
+	FormalArgList();
+	match(ARROW);
+	while(isInPredSt(stmtPredSt)){
+	    Statement();
+	    match(SEMICOLON);
+	}
+	match(RCURLY);
+	if(DEBUGMAXPARSER==1) System.out.println("closureup");
     }
     private void FormalArgList() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("formalarglistdown");
+	if(isKind(IDENT)){
+	    VarDec();
+	    while(isKind(COMMA)){
+		match(COMMA);
+		VarDec();
+	    }
+	}
+	if(DEBUGMAXPARSER==1) System.out.println("formalarglistup");
     }
     private void If() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("ifdown");
 	match(KW_IF);
 	match(LPAREN);
 	Expression();
 	match(RPAREN);
 	Block();
 	Else();
+	if(DEBUGMAXPARSER==1) System.out.println("ifup");
     }
     private void Else() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("elsedown");
 	if(isKind(KW_ELSE)){
 	    match(KW_ELSE);
 	    Block();
 	}
+	if(DEBUGMAXPARSER==1) System.out.println("elseup");
     }
     private void While() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("whiledown");
 	match(KW_WHILE);
 	if(isKind(TIMES))
 	    WhileStar();
@@ -278,83 +383,265 @@ public class SimpleParser {
 	    match(RPAREN);
 	    Block();
 	}
+	if(DEBUGMAXPARSER==1) System.out.println("whiledown");
     }
     private void WhileStar() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("whilestardown");
 	match(TIMES);
 	match(LPAREN);
 	Expression();
 	WhileStarExprTail();
+	if(DEBUGMAXPARSER==1) System.out.println("whilestarup");
     }
 
     private void WhileStarExprTail() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("whilestarexprtaildown");
 	if(isKind(RANGE))
 	    RangeExprTail();
 	match(RPAREN);
 	Block();
+	if(DEBUGMAXPARSER==1) System.out.println("whilestarexprtailup");
     }
 
     private void RangeExprTail() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("rangeexprtaildown");
 	match(RANGE);
 	Expression();
+	if(DEBUGMAXPARSER==1) System.out.println("rangeexprtailup");
     }
 
     private void LValue() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("lvaluedown");
 	match(IDENT);
-	if(isKind(LSQUARE));
+	if(isKind(LSQUARE))
+	    LRValue();	
+	if(DEBUGMAXPARSER==1) System.out.println("lvalueup");
     }
     private void LRValue() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("lrvaluedown");
 	match(LSQUARE);
-	Expression();
+	ExpressionList();
 	match(RSQUARE);
+	if(DEBUGMAXPARSER==1) System.out.println("lrvalueup");
     }
 
     private void ExpressionList() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("expressionlistdown");
+	if(isInPredSt(fctrPredSt)){
+	    Expression();
+	    while(isKind(COMMA)){
+		match(COMMA);
+		Expression();
+	    }
+	}
+	if(DEBUGMAXPARSER==1) System.out.println("expressionlistup");
+	    
     }
     private void KeyValueList() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("keyvaluelistdown");
+	if(isInPredSt(fctrPredSt)){
+	    KeyValueExpression();
+	    while(isKind(COMMA)){
+		match(COMMA);
+		KeyValueExpression();
+	    }
+	}
+	if(DEBUGMAXPARSER==1) System.out.println("keyvaluelistup");
     }
     private void KeyValueExpression() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("keyvalueexpressionup");
+	Expression();
+	match(COLON);
+	Expression();
+	if(DEBUGMAXPARSER==1) System.out.println("keyvalueexpressiondown");
     }
     private void RangeExpr() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("rangeexprdown");
+	Expression();
+	match(RANGE);
+	Expression();
+	if(DEBUGMAXPARSER==1) System.out.println("rangeexprup");
     }
     private void Expression() throws SyntaxException {
-	//fctrPredSt == trmPredSt
-	if(isInPredSt(fctrPredSt))
-	    Term();
+	if(DEBUGMAXPARSER==1) System.out.println("expressiondown");
+	Term();
 	while(isInPredSt(relOpPredSt)){
 	    RelOp();
 	    Term();
 	}
+	if(DEBUGMAXPARSER==1) System.out.println("expressionup");
     }
     private void Term() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("termdown");
+	Elem();
+	while(isKind(PLUS)||isKind(MINUS)){
+	    WeakOp();
+	    Elem();
+	}
+	if(DEBUGMAXPARSER==1) System.out.println("termup");
     }
     private void Elem() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("elemdown");
+	Thing();
+	while(isKind(TIMES)||isKind(DIV)){
+	    StrongOp();
+	    Thing();
+	}
+	if(DEBUGMAXPARSER==1) System.out.println("elemup");
     }
     private void Thing() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("thingdown");
+	Factor();
+	while(isKind(LSHIFT)||isKind(RSHIFT)){
+	    VeryStrongOp();
+	    Factor();
+	}
+	if(DEBUGMAXPARSER==1) System.out.println("thingup");
     }
     private void Factor() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("factordown");
+	if(isKind(IDENT))
+	    IdentInFactor();
+	else if(isKind(INT_LIT))
+	    match(INT_LIT);
+	else if(isKind(BL_TRUE))
+	    match(BL_TRUE);
+	else if(isKind(BL_FALSE))
+	    match(BL_FALSE);
+	else if(isKind(STRING_LIT))
+	    match(STRING_LIT);
+	else if(isKind(NOT)){
+	    match(NOT);
+	    Factor();
+	}
+	else if(isKind(MINUS)){
+	    match(MINUS);
+	    Factor();
+	}
+	else if(isKind(KW_SIZE)){
+	    match(KW_SIZE);
+	    match(LPAREN);
+	    Expression();
+	    match(RPAREN);
+	}
+	else if(isKind(KW_KEY)){
+	    match(KW_KEY);
+	    match(LPAREN);
+	    Expression();
+	    match(RPAREN);
+	}
+	else if(isKind(KW_VALUE)){
+	    match(KW_KEY);
+	    match(LPAREN);
+	    Expression();
+	    match(RPAREN);
+	}
+	else if(isKind(LCURLY))
+	    Closure();
+	else if(isKind(AT))
+	    List();
+	else if(isKind(LPAREN)){
+	    match(LPAREN);
+	    Expression();
+	    match(RPAREN);
+	}
+	else{
+	    throw new SyntaxException(t, "factor exception");		
+	}
+	if(DEBUGMAXPARSER==1) System.out.println("factorup");
     }
+
+    private void List() throws SyntaxException {
+	match(AT);
+	if(isKind(AT)){
+	    match(AT);
+	    match(LSQUARE);
+	    KeyValueList();
+	    match(RSQUARE);
+	}
+	else{
+	    match(LSQUARE);
+	    ExpressionList();
+	    match(RSQUARE);
+	}
+    }
+
     private void IdentInFactor() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("indentinfactordown");
+	match(IDENT);
+	if(isKind(LSQUARE)){
+	    match(LSQUARE);
+	    Expression();
+	    match(RSQUARE);
+	}
+	else if(isKind(LPAREN)){
+	    match(LPAREN);
+	    ExpressionList();
+	    match(RPAREN);
+	}
+	else{
+	    if(DEBUGMAXPARSER==1) System.out.println("indentinfactorup");
+	    return;//epsilon
+	}
     }
+
     private void RelOp() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("relopdown");
+	if(isKind(BAR))
+	    match(BAR);
+	else if(isKind(AND))
+	    match(AND);
+	else if(isKind(EQUAL))
+	    match(EQUAL);
+ 	else if(isKind(NOTEQUAL))
+	    match(NOTEQUAL);
+ 	else if(isKind(LT))
+	    match(LT);
+ 	else if(isKind(GT))
+	    match(GT);
+ 	else if(isKind(LE))
+	    match(LE);
+ 	else if(isKind(GE))
+	    match(GE);
+ 	else{
+	    throw new SyntaxException(t,"relop exception"); 
+	}
+	if(DEBUGMAXPARSER==1) System.out.println("relopup");
     }
+
     private void WeakOp() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("weakopdown");
+	if(isKind(PLUS))
+	    match(PLUS);
+	else if(isKind(MINUS))
+	    match(MINUS);
+	else{
+	    throw new SyntaxException(t,"weakop exception");
+	}
+	if(DEBUGMAXPARSER==1) System.out.println("weakdown");
     }
     private void StrongOp() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("strongopdown");
+	if(isKind(TIMES))
+	    match(TIMES);
+	else if(isKind(DIV))
+	    match(DIV);
+	else{
+	    throw new SyntaxException(t,"strongop exception");	
+	}
+	if(DEBUGMAXPARSER==1) System.out.println("strongopup");
     }
     private void VeryStrongOp() throws SyntaxException {
-	
+	if(DEBUGMAXPARSER==1) System.out.println("verystrongopdown");
+	if(isKind(LSHIFT))
+	    match(LSHIFT);
+	else if(isKind(RSHIFT))
+	    match(RSHIFT);
+	else{
+	    throw new SyntaxException(t,"verystrongop exception");
+	}
+	if(DEBUGMAXPARSER==1) System.out.println("verystrongopup");
+
     }
 
 
