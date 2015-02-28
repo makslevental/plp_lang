@@ -262,8 +262,8 @@ public class SimpleParser {
     private void VarDec() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("vardecdown");
 	match(IDENT);
-	if(isKind(SEMICOLON)){
-	    match(SEMICOLON);
+	if(isKind(COLON)){
+	    match(COLON);
 	    Type();
 	}
 	else{
@@ -502,7 +502,7 @@ public class SimpleParser {
 	    match(RPAREN);
 	}
 	else if(isKind(KW_VALUE)){
-	    match(KW_KEY);
+	    match(KW_VALUE);
 	    match(LPAREN);
 	    Expression();
 	    match(RPAREN);
