@@ -391,7 +391,7 @@ public class SimpleParser {
     private void LValueTail() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("lrvaluedown");
 	match(LSQUARE);
-	ExpressionList();
+	Expression();//List();
 	match(RSQUARE);
 	if(DEBUGMAXPARSER==1) System.out.println("lrvalueup");
     }
