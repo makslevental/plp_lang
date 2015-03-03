@@ -33,7 +33,7 @@ elif [ "$1" = "DEBUGASTEX" ]; then
     mv ast/*.class ast/cop5555sp15/
     jdb -classpath $CLASSPATH org.junit.runner.JUnitCore cop5555sp15.TestParserErrorHandling 
 elif [ "$1" = "TESTASTEX" ]; then
-    javac -cp $CLASSPATH ast/TestParserErrorHandling.java.java ast/Parser.java
+    javac -cp $CLASSPATH ast/TestParserErrorHandling.java ast/Parser.java
     mv ast/*.class parser/cop5555sp15/
     java -cp $CLASSPATH org.junit.runner.JUnitCore cop5555sp15.TestParserErrorHandling 
 fi

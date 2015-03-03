@@ -1,7 +1,6 @@
 package cop5555sp15.ast;
 
 import cop5555sp15.TokenStream.Token;
-
 public class VarDec extends Declaration {
 	Token identToken;
 	Type type;
@@ -11,6 +10,12 @@ public class VarDec extends Declaration {
 		super(firstToken);
 		this.identToken = identToken;
 		this.type = type;
+	}
+
+	public VarDec(Token firstToken, Token identToken) {
+		super(firstToken);
+		this.identToken = identToken;
+		this.type = new SimpleType(firstToken, identToken);
 	}
 
 

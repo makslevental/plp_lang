@@ -175,16 +175,20 @@ public class Parser {
     public Program parse() throws SyntaxException {
 	Program p = null;
 	try {
-	p = Program();
-	if(p!=null)
-	    match(EOF);
+	    p = Program();
+	    if(p!=null)
+		match(EOF);
 	} catch (SyntaxException e) {
 	    exceptionList.add(e);
 	}
 	if(exceptionList.isEmpty())
 	    return p;
-	else
+	else {
+	    System.err.println("exception list not empty; " + exceptionList.toArray().length + " exceptions");
+	    for(SyntaxException e : exceptionList)
+	    	System.err.println(e.getMessage());
 	    return null;
+	}
     }
 
 
@@ -206,7 +210,7 @@ public class Parser {
 	    exceptionList.add(e);
 	}
 	Program p = new Program(ft, impList, className, b); 
-
+	
 	if(DEBUGMAXPARSER==1) System.out.println("programup");
 	return p;
     }
@@ -215,7 +219,7 @@ public class Parser {
 	if(DEBUGMAXPARSER==1) System.out.println("importlistdown");
 
 	List<QualifiedName> impList = new ArrayList<QualifiedName>();
-	StringBuilder impStSb = new StringBuilder();
+	
 	Token ft;
 
 	try {
@@ -223,7 +227,7 @@ public class Parser {
 		try {
 		    ft = t;
 		    match(KW_IMPORT);
-
+		    StringBuilder impStSb = new StringBuilder();
 		    if(isKind(IDENT)) impStSb.append(t.getText());
 		    match(IDENT);
 
@@ -242,7 +246,7 @@ public class Parser {
 		    //then eat everything until you hit the semicolon that terminates
 		    //the import statement. but make sure not to eat part of forthcoming
 		    //<Block>
-		    while(!isKind(SEMICOLON) && !isKind(LCURLY))
+		    while(!isKind(SEMICOLON) && !isKind(KW_CLASS) && !isKind(KW_IMPORT))
 			match(t.kind);
 		    if(isKind(SEMICOLON)) match(SEMICOLON);
 		    exceptionList.add(e);
@@ -276,7 +280,7 @@ public class Parser {
 			bElem = Statement();
 			match(SEMICOLON);
 		    }
-		    bElemList.add(bElem);
+		    if(bElem!=null) bElemList.add(bElem);
 		} catch (SyntaxException e) {
 		    //if any match inside any blocl elem throws an exception 
 		    //(except semicolon of course because that terminates blockelem)
@@ -326,11 +330,12 @@ public class Parser {
 	    exp = Expression();
 	    st = new ExpressionStatement(t,exp);
 	}
-	else { //if(isKind(KW_RETURN)){
+	else if(isKind(KW_RETURN)){
 	    match(KW_RETURN);
 	    exp = Expression();
 	    st = new ReturnStatement(t,exp);
 	}
+	
 	if(DEBUGMAXPARSER==1) System.out.println("statementup");
 	return st;
     }
@@ -341,14 +346,19 @@ public class Parser {
 	Type tp;
 	Closure cl;
 
-	DecTailClass(Closure cl){
+	DecTailClass(Closure c){
 	    type = "ClosureDec";
-	    cl = cl;
+	    cl = c;
+	}
+	//vardec with type
+	DecTailClass(Type typ){
+	    type = "VarDecWithType";
+	    tp = typ;
 	}
 
-	DecTailClass(Type typ){
-	    type = "VarDec";
-	    tp = typ;
+	//vardec no type
+	DecTailClass(int dummy){
+	    type = "VarDecNoType";
 	}
     }
 
@@ -366,7 +376,8 @@ public class Parser {
 	DecTailClass d = DecTail();
 
 	if(d.type.equals("ClosureDec")) de = new ClosureDec(ft,id,d.cl);
-	else de = new VarDec(ft,id,d.tp);
+	else if(d.type.equals("VarDecWithType")) de = new VarDec(ft,id,d.tp);
+	else de = new VarDec(ft,id);
 
 	if(DEBUGMAXPARSER==1) System.out.println("declaration");
 	return de;
@@ -383,95 +394,182 @@ public class Parser {
 	if(isKind(ASSIGN)){
 	    match(ASSIGN);
 	    cl = Closure();
-	}//VarDec
-	else{ //if(isKind(COLON)){
+	    d = new DecTailClass(cl);
+	}//VarDec alternative
+	else if(isKind(COLON)){
 	    match(COLON);
+	    //System.err.println(t);
 	    tp = Type();
+	    d = new DecTailClass(tp);
 	}
-
-	if(cl!=null) d = new DecTailClass(cl);
-	else d = new DecTailClass(tp);
+	else
+	    d = new DecTailClass(0);
 
 	if(DEBUGMAXPARSER==1) System.out.println("dectailup");
 	return d;	
     }
 
-    private void VarDec() throws SyntaxException {
+    private VarDec VarDec() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("vardecdown");
+
+	VarDec v = null;
+	Token ft = t;
+	Token id = t;
+	Type t = null;
+	
 	match(IDENT);
-	if(isKind(SEMICOLON)){
-	    match(SEMICOLON);
-	    Type();
+	
+	if(isKind(COLON)){
+	    match(COLON);
+	    t = Type();
+	    v = new VarDec(ft, id, t);
 	}
-	else{
-	    if(DEBUGMAXPARSER==1) System.out.println("vardecup");
-	    return;//epsilon
+	else v = new VarDec(ft, id);
+	
+	if(DEBUGMAXPARSER==1) System.out.println("vardecup");
+	return v;//epsilon
+	
+    }
+
+    class CompositeValueTypeClass {
+	String type;
+	SimpleType st;
+	Type t;
+
+	CompositeValueTypeClass(Type tt) {
+	    type = "ListType";
+	    t = tt;
+	}
+
+	CompositeValueTypeClass(SimpleType stt, Type tt) {
+	    type = "KeyValueType";
+	    st = stt;
+	    t = tt;
 	}
     }
 
 
-    private void Type() throws SyntaxException {
+    private Type Type() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("typedown");
+	
+	Token ft = t;
+	CompositeValueTypeClass c = null;
+	Type tp = null;
+
 	if(isKind(KW_INT)||isKind(KW_BOOLEAN)||isKind(KW_STRING))
-	   SimpleType();
+	    tp = SimpleType();
 	else
-	    CompositeValueType();	   
+	    c = CompositeValueType();
+
+	if(c!=null){
+	    switch(c.type) {
+	    case "ListType":
+		tp = new ListType(ft, c.t);
+		break;
+	    case "KeyValueType":
+		tp = new KeyValueType(ft,c.st,c.t);
+	    }
+	}
+
 	if(DEBUGMAXPARSER==1) System.out.println("typeup");
+	return tp;
+	
     }
 
-    private void SimpleType() throws SyntaxException {
+    private SimpleType SimpleType() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("simpletypedown");
-	if(isKind(KW_INT))
+	
+	SimpleType s = new SimpleType(t,t);
+
+	if(isKind(KW_INT)){
 	    match(KW_INT);
-	else if(isKind(KW_BOOLEAN))
+	}
+	else if(isKind(KW_BOOLEAN)){
 	    match(KW_BOOLEAN);
+	}
 	else
 	    match(KW_STRING);
+
 	if(DEBUGMAXPARSER==1) System.out.println("simpletypeup");
+	return s;
     }
 
-    private void CompositeValueType() throws SyntaxException {
+    private CompositeValueTypeClass CompositeValueType() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("compositevaluetypedown");
+	
+	Type ty = null;
+	SimpleType st = null;
+	CompositeValueTypeClass c = null;
+	
 	match(AT);
 	if(isKind(LSQUARE)){
 	    match(LSQUARE);
-	    Type();
+	    ty = Type();
 	    match(RSQUARE);
 	}
 	else{
 	    match(AT);
 	    match(LSQUARE);
-	    SimpleType();
+	    st = SimpleType();
 	    match(COLON);
-	    Type();
+	    ty = Type();
 	    match(RSQUARE);
 	}
+	
+	if(st!=null) c = new CompositeValueTypeClass(st,ty);
+	else c = new CompositeValueTypeClass(ty);
+
 	if(DEBUGMAXPARSER==1) System.out.println("compositevaluetypeup");
+	return c;
 	    
     }
 
-    private void Closure() throws SyntaxException {
+    private Closure Closure() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("closuredown");
+	
+	Token ft = t;
+	Closure c = null;
+	List<VarDec> l = null;
+	List<Statement> s = new ArrayList<Statement>();
+	
 	match(LCURLY);
-	FormalArgList();
+	l = FormalArgList();
 	match(ARROW);
 	while(isInPredSt(stmtPredSt)){
-	    Statement();
-	    match(SEMICOLON);
-	}
-	match(RCURLY);
-	if(DEBUGMAXPARSER==1) System.out.println("closureup");
-    }
-    private void FormalArgList() throws SyntaxException {
-	if(DEBUGMAXPARSER==1) System.out.println("formalarglistdown");
-	if(isKind(IDENT)){
-	    VarDec();
-	    while(isKind(COMMA)){
-		match(COMMA);
-		VarDec();
+	    try {
+		Statement ss = Statement();
+		if(ss!=null) s.add(ss);
+		match(SEMICOLON);
+	    } catch (SyntaxException e) {
+		while(!isKind(SEMICOLON) && !isKind(RCURLY))
+		    match(t.kind);
+		if(isKind(SEMICOLON)) match(SEMICOLON);
+		exceptionList.add(e);
 	    }
 	}
+	match(RCURLY);
+	
+	c = new Closure(ft,l,s);
+	if(DEBUGMAXPARSER==1) System.out.println("closureup");
+	return c;
+    }
+
+    private List<VarDec> FormalArgList() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("formalarglistdown");
+	
+	List<VarDec> l = new ArrayList<VarDec>();
+
+	if(isKind(IDENT)){
+	    l.add(VarDec());
+	    while(isKind(COMMA)){
+		match(COMMA);
+		VarDec v = VarDec();
+		if(v!=null) l.add(v);
+	    }
+	}
+	
 	if(DEBUGMAXPARSER==1) System.out.println("formalarglistup");
+	return l;
     }
 
     private Statement If() throws SyntaxException {
@@ -518,17 +616,17 @@ public class Parser {
 	Expression exp1;
 	Expression exp2;
 
-	WhileStarClass(Token t, Expression exp){
+	WhileStarClass(Token tt, Expression exp){
 	    type="WhileStar";
-	    t = t;
+	    t = tt;
 	    exp1 = exp;		
 	}
 
-	WhileStarClass(Token t, Expression exp1, Expression exp2){
+	WhileStarClass(Token tt, Expression eexp1, Expression eexp2){
 	    type="WhileRange";
-	    t = t;
-	    exp1 = exp1;
-	    exp2 = exp2;
+	    t = tt;
+	    exp1 = eexp1;
+	    exp2 = eexp2;
 	}
     }
 
@@ -595,7 +693,7 @@ public class Parser {
 	if(DEBUGMAXPARSER==1) System.out.println("lvaluedown");
 
 	Token ft = t;
-	ExpressionLValue e = null;
+	Expression e = null;
 	LValue l = null;
 	
 	Token id = t;
@@ -603,181 +701,413 @@ public class Parser {
 
 	if(isKind(LSQUARE)) e = LValueTail();	
 	
-	if(e!=null) l = e;
+	if(e!=null) l = new ExpressionLValue(ft,id,e);
 	else l = new IdentLValue(t,id);
 
 	if(DEBUGMAXPARSER==1) System.out.println("lvalueup");
 	return l;
     }
-    private List<Expression> LValueTail() throws SyntaxException {
+    private Expression LValueTail() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("lrvaluedown");
 	
-	List<Expression>
+	Expression e = null;
 
 	match(LSQUARE);
-	Expression();
+	e = Expression();
 	match(RSQUARE);
 	
 	if(DEBUGMAXPARSER==1) System.out.println("lrvalueup");
+	return e;
     }
 
-    private void ExpressionList() throws SyntaxException {
+    private List<Expression> ExpressionList() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("expressionlistdown");
+	
+	List<Expression> l = new ArrayList<Expression>();
+	Expression tempE1 = null;
+	Expression tempE2 = null;
+
 	if(isInPredSt(fctrPredSt)){
-	    Expression();
+	    tempE1 = Expression();
+	    l.add(tempE1);
 	    while(isKind(COMMA)){
 		match(COMMA);
-		Expression();
+		tempE2 = Expression();
+		l.add(tempE2);
 	    }
 	}
+	
 	if(DEBUGMAXPARSER==1) System.out.println("expressionlistup");
-	    
+	return l;
     }
-    private void KeyValueList() throws SyntaxException {
+    private List<KeyValueExpression> KeyValueList() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("keyvaluelistdown");
+
+	List<KeyValueExpression> kvl = new ArrayList<KeyValueExpression>();
+
 	if(isInPredSt(fctrPredSt)){
-	    KeyValueExpression();
+	    kvl.add(KeyValueExpression());
 	    while(isKind(COMMA)){
 		match(COMMA);
-		KeyValueExpression();
+		kvl.add(KeyValueExpression());
 	    }
 	}
+	
 	if(DEBUGMAXPARSER==1) System.out.println("keyvaluelistup");
+	return kvl;
     }
-    private void KeyValueExpression() throws SyntaxException {
-	if(DEBUGMAXPARSER==1) System.out.println("keyvalueexpressionup");
-	Expression();
-	match(COLON);
-	Expression();
+    private KeyValueExpression KeyValueExpression() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("keyvalueexpressiondown");
+	
+	Token ft = t;
+	KeyValueExpression kv = null;
+	Expression ky = null;
+	Expression val = null;
+
+	ky = Expression();
+	match(COLON);
+	val = Expression();
+	
+	kv = new KeyValueExpression(t, ky, val);
+	
+	if(DEBUGMAXPARSER==1) System.out.println("keyvalueexpressiondown");
+	return kv;
+    }
+    //left to right associativity
+    private BinaryExpression bins(List<Token> ops,List<Expression> exps) {
+	
+	BinaryExpression b = null;
+	//System.err.println("**********************************" + exps.toArray().length);
+	if(exps.toArray().length<=2)
+	    b = new BinaryExpression(ops.get(0),exps.get(0),ops.get(0),exps.get(1));
+	else b = new BinaryExpression(ops.get(0),
+				      bins(ops.subList(0,ops.toArray().length-1),exps.subList(0,exps.toArray().length-1)),
+				      ops.get(ops.toArray().length-1),
+				      exps.get(exps.toArray().length-1) );
+
+	return b;
     }
 
-    private void Expression() throws SyntaxException {
+    private Expression Expression() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("expressiondown");
-	Term();
+	
+	Expression e = null;
+	Expression t1 = null;
+	List<Expression> tL = new ArrayList<Expression>();
+	List<Token> oL = new ArrayList<Token>();
+
+	t1 = Term();
 	while(isInPredSt(relOpPredSt)){
-	    RelOp();
-	    Term();
+	    oL.add(RelOp());
+	    tL.add(Term());
 	}
+	
+	if(!tL.isEmpty()){
+	    tL.add(0,t1);
+	    e = bins(oL,tL);
+	}
+	else e = t1;
+ 
 	if(DEBUGMAXPARSER==1) System.out.println("expressionup");
+	return e;
     }
-    private void Term() throws SyntaxException {
+
+    private Expression Term() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("termdown");
-	Elem();
+	
+	Expression e = null;
+	Expression e1 = null;
+	List<Expression> eL = new ArrayList<Expression>();
+	List<Token> oL = new ArrayList<Token>();
+
+	e1 = Elem();
 	while(isKind(PLUS)||isKind(MINUS)){
-	    WeakOp();
-	    Elem();
+	    oL.add(WeakOp());
+	    eL.add(Elem());
 	}
+	
+	if(!eL.isEmpty()){
+	    eL.add(0,e1);
+	    e = bins(oL,eL);
+	}
+	else e = e1;
+ 
 	if(DEBUGMAXPARSER==1) System.out.println("termup");
+	return e;
     }
-    private void Elem() throws SyntaxException {
+
+    private Expression Elem() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("elemdown");
-	Thing();
+	
+	Expression e = null;
+	Expression th1 = null;
+	List<Expression> thL = new ArrayList<Expression>();
+	List<Token> oL = new ArrayList<Token>();
+	
+	th1 = Thing();
 	while(isKind(TIMES)||isKind(DIV)){
-	    StrongOp();
-	    Thing();
+	    oL.add(StrongOp());
+	    thL.add(Thing());
 	}
+		
+	if(!thL.isEmpty()){
+	    thL.add(0,th1);
+	    e = bins(oL,thL);
+	}
+	else e = th1;
+ 
 	if(DEBUGMAXPARSER==1) System.out.println("elemup");
+	return e;
     }
-    private void Thing() throws SyntaxException {
+
+    private Expression Thing() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("thingdown");
-	Factor();
+
+	Expression e = null;
+	Expression f1 = null;
+	List<Expression> fL = new ArrayList<Expression>();
+	List<Token> oL = new ArrayList<Token>();
+
+	f1 = Factor();
 	while(isKind(LSHIFT)||isKind(RSHIFT)){
-	    VeryStrongOp();
-	    Factor();
+	    oL.add(VeryStrongOp());
+	    fL.add(Factor());
 	}
+
+	if(!fL.isEmpty()){
+	    fL.add(0,f1);
+	    e = bins(oL,fL);
+	}
+	else e = f1;
+	
 	if(DEBUGMAXPARSER==1) System.out.println("thingup");
+	return e;
     }
-    private void Factor() throws SyntaxException {
+
+    //IdentExpression,ListOrMapElemExpression,ClosureEvalExpression
+    class IdentInFactorClass {
+	String type;
+	Token id;
+	Expression e;
+	List<Expression> el;
+
+	IdentInFactorClass(Token i){
+	    type = "IdentExpression";
+	    id = i;
+	}
+
+	IdentInFactorClass(Token i, Expression ex){
+	    type = "ListOrMapElemExpression";
+	    id = i;
+	    e = ex;
+	}
+
+	IdentInFactorClass(Token i, List<Expression> l){
+	    type = "ClosureEvalExpression";
+	    id = i;
+	    el = l;
+	}
+       
+        void tostring() {
+	    System.out.println(type + "\n");
+	    System.out.println(id + "\n");
+	    switch(type){
+	    case "IdentExpression":
+		break;
+	    case "ListOrMapElemExpression":
+		System.out.println(e + "\n");
+		break;
+	    case "ClosureEvalExpression":
+		System.out.println(el.get(0) + "\n");
+	    }
+	}
+    }
+
+    private Expression Factor() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("factordown");
-	if(isKind(IDENT))
-	    IdentInFactor();
-	else if(isKind(INT_LIT))
+
+	Token ft = t;
+	Expression f = null;
+	Expression e = null;
+
+	if(isKind(IDENT)) {
+	    IdentInFactorClass id = IdentInFactor();
+	    switch(id.type) {
+	    case "IdentExpression":
+		f = new IdentExpression(ft,id.id);
+		break;
+	    case "ListOrMapElemExpression":
+		f = new ListOrMapElemExpression(ft,id.id,id.e);
+		break;
+	    case "ClosureEvalExpression":
+		f = new ClosureEvalExpression(ft,id.id,id.el);
+	    }
+	}
+	else if(isKind(INT_LIT)) {
+	    f = new IntLitExpression(ft,t.getIntVal());
 	    match(INT_LIT);
-	else if(isKind(BL_TRUE))
+	}
+	else if(isKind(BL_TRUE)){
+	    f = new BooleanLitExpression(ft, t.getBooleanVal());
 	    match(BL_TRUE);
-	else if(isKind(BL_FALSE))
+	}
+	else if(isKind(BL_FALSE)){
+	    f = new BooleanLitExpression(ft, t.getBooleanVal());
 	    match(BL_FALSE);
-	else if(isKind(STRING_LIT))
+	}
+	else if(isKind(STRING_LIT)){
+	    f = new StringLitExpression(ft, t.getText());
 	    match(STRING_LIT);
+	}
 	else if(isKind(NOT)){
-	    match(NOT);
-	    Factor();
+	    Token op = t;
+	    match(NOT);	 
+	    e = Factor();
+	    f = new UnaryExpression(ft, op, e);
 	}
 	else if(isKind(MINUS)){
+	    Token op = t;
 	    match(MINUS);
-	    Factor();
+	    e = Factor();
+	    f = new UnaryExpression(ft, op, e);
 	}
 	else if(isKind(KW_SIZE)){
 	    match(KW_SIZE);
 	    match(LPAREN);
-	    Expression();
+	    e = Expression();
+	    f = new SizeExpression(ft, e);
 	    match(RPAREN);
 	}
 	else if(isKind(KW_KEY)){
 	    match(KW_KEY);
 	    match(LPAREN);
-	    Expression();
+	    e = Expression();
+	    f = new KeyExpression(ft, e);
 	    match(RPAREN);
 	}
 	else if(isKind(KW_VALUE)){
-	    match(KW_KEY);
+	    match(KW_VALUE);
 	    match(LPAREN);
-	    Expression();
+	    e = Expression();
+	    f = new ValueExpression(ft, e);
 	    match(RPAREN);
 	}
-	else if(isKind(LCURLY))
-	    Closure();
-	else if(isKind(AT))
-	    List();
+	else if(isKind(LCURLY)){
+	    Closure cl = Closure();
+	    f = new ClosureExpression(ft, cl);
+	}
+	else if(isKind(AT)) { //List is my list, not hers
+	    ListClass l = List();
+	    switch(l.type){
+	    case "ListExpression":
+		f = new ListExpression(ft, l.l);
+		break;
+	    case "MapListExpression":
+		f = new MapListExpression(ft, l.ml);
+	    }
+	}
 	else if(isKind(LPAREN)){
 	    match(LPAREN);
-	    Expression();
+	    f = Expression();
 	    match(RPAREN);
 	}
 	else{
-	    throw new SyntaxException(t, "factor exception");		
+	    //not really the kind expected but since the exception class is stupid
+	    //need to pass some sort of kind
+	    throw new SyntaxException(t, KW_VALUE);		
 	}
+
 	if(DEBUGMAXPARSER==1) System.out.println("factorup");
+	return f;
     }
 
-    private void List() throws SyntaxException {
+    class ListClass {
+	String type;
+	List<Expression> l;
+	List<KeyValueExpression> ml;
+	//dummy is just for diff signatures
+	ListClass(List<Expression> ll, int dummy){
+	    type = "ListExpression";
+	    l = ll;
+	}
+
+	ListClass(List<KeyValueExpression> mll){
+	    type = "MapListExpression";
+	    ml = mll;
+	}
+    }
+
+    private ListClass List() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("listdown");
+
+	List<KeyValueExpression> kvl = null;
+	List<Expression> el = null;
+	ListClass l = null;
+
 	match(AT);
 	// <MapList> i.e. @@[ <KeyValueList> ]
 	if(isKind(AT)){
 	    match(AT);
 	    match(LSQUARE);
-	    KeyValueList();
+	    kvl = KeyValueList();
 	    match(RSQUARE);
 	}
 	else{// <List> i.e. @[ <ExpressionList> ]
 	    match(LSQUARE);
-	    ExpressionList();
+	    el = ExpressionList();
 	    match(RSQUARE);
 	}
+
+	if(kvl!=null) l = new ListClass(kvl);
+	else l = new ListClass(el,1);
+
+	if(DEBUGMAXPARSER==1) System.out.println("listup");
+	return l;
     }
 
-    private void IdentInFactor() throws SyntaxException {
-	if(DEBUGMAXPARSER==1) System.out.println("indentinfactordown");
+    private IdentInFactorClass IdentInFactor() throws SyntaxException {
+	if(DEBUGMAXPARSER==1) System.out.println("identinfactordown");
+
+	IdentInFactorClass id = null;
+	Expression e = null;
+	List<Expression> l = null;
+
+	Token idT = t;
 	match(IDENT);
+
 	if(isKind(LSQUARE)){
 	    match(LSQUARE);
-	    Expression();
+	    e = Expression();
 	    match(RSQUARE);
 	}
 	else if(isKind(LPAREN)){
 	    match(LPAREN);
-	    ExpressionList();
+	    l = ExpressionList();
 	    match(RPAREN);
 	}
-	else{
-	    if(DEBUGMAXPARSER==1) System.out.println("indentinfactorup");
-	    return;//epsilon
+	
+	//System.err.println("%%%%%%%%%%%%%%" + idT);
+
+	if(e!=null || l!=null){
+	    //System.err.println("test1");
+	    if(e!=null) id = new IdentInFactorClass(idT, e);
+	    else id = new IdentInFactorClass(idT, l);
 	}
+	else{
+	    //System.err.println("test2");
+	    id = new IdentInFactorClass(idT);
+	}
+	//System.err.println("$$$$$$$$$$$$$$$$$$$ ");
+	//id.tostring();
+	if(DEBUGMAXPARSER==1) System.out.println("identinfactorup");
+	return id;
     }
 
-    private void RelOp() throws SyntaxException {
+    private Token RelOp() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("relopdown");
+	
+	Token op = t;
+	
 	if(isKind(BAR))
 	    match(BAR);
 	else if(isKind(AND))
@@ -797,11 +1127,16 @@ public class Parser {
  	else{
 	    throw new SyntaxException(t,"relop exception"); 
 	}
+	
 	if(DEBUGMAXPARSER==1) System.out.println("relopup");
+	return op;
     }
 
-    private void WeakOp() throws SyntaxException {
+    private Token WeakOp() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("weakopdown");
+	
+	Token op = t;
+	
 	if(isKind(PLUS))
 	    match(PLUS);
 	else if(isKind(MINUS))
@@ -809,10 +1144,16 @@ public class Parser {
 	else{
 	    throw new SyntaxException(t,"weakop exception");
 	}
+		
 	if(DEBUGMAXPARSER==1) System.out.println("weakdown");
+	return op;
     }
-    private void StrongOp() throws SyntaxException {
+
+    private Token StrongOp() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("strongopdown");
+	
+	Token op = t;
+
 	if(isKind(TIMES))
 	    match(TIMES);
 	else if(isKind(DIV))
@@ -820,10 +1161,16 @@ public class Parser {
 	else{
 	    throw new SyntaxException(t,"strongop exception");	
 	}
+
 	if(DEBUGMAXPARSER==1) System.out.println("strongopup");
+	return op;
     }
-    private void VeryStrongOp() throws SyntaxException {
+
+    private Token VeryStrongOp() throws SyntaxException {
 	if(DEBUGMAXPARSER==1) System.out.println("verystrongopdown");
+	
+	Token op = t;
+	
 	if(isKind(LSHIFT))
 	    match(LSHIFT);
 	else if(isKind(RSHIFT))
@@ -831,8 +1178,9 @@ public class Parser {
 	else{
 	    throw new SyntaxException(t,"verystrongop exception");
 	}
-	if(DEBUGMAXPARSER==1) System.out.println("verystrongopup");
 
+	if(DEBUGMAXPARSER==1) System.out.println("verystrongopup");
+	return op;
     }
 
 
