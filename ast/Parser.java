@@ -232,7 +232,7 @@ public class Parser {
 		    match(IDENT);
 
 		    while(isKind(DOT)){
-			impStSb.append("\\");
+			impStSb.append("/");
 			match(DOT);
 			if(isKind(IDENT)) impStSb.append(t.getText());
 			match(IDENT);
