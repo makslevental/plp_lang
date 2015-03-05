@@ -72,6 +72,14 @@ public class ToStringVisitor implements ASTVisitor {
 	}
 
 	@Override
+	public Object visitUndeclaredType(UndeclaredType undeclaredType, Object arg) {
+		sb.append(arg).append("UndeclaredType").append('\n');
+		String indent = arg + "  ";
+		sb.append(indent).append('\n');//.append(simpleType.type.getText()).append('\n');
+		return null;
+	}
+
+	@Override
 	public Object visitKeyValueType(KeyValueType keyValueType, Object arg)
 			throws Exception {
 		sb.append(arg).append("KeyValueType").append('\n');

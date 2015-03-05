@@ -377,7 +377,7 @@ public class Parser {
 
 	if(d.type.equals("ClosureDec")) de = new ClosureDec(ft,id,d.cl);
 	else if(d.type.equals("VarDecWithType")) de = new VarDec(ft,id,d.tp);
-	else de = new VarDec(ft,id);
+	else de = new VarDec(ft,id, new UndeclaredType(id));
 
 	if(DEBUGMAXPARSER==1) System.out.println("declaration");
 	return de;
@@ -424,7 +424,7 @@ public class Parser {
 	    t = Type();
 	    v = new VarDec(ft, id, t);
 	}
-	else v = new VarDec(ft, id);
+	else v = new VarDec(ft, id,new UndeclaredType(id));
 	
 	if(DEBUGMAXPARSER==1) System.out.println("vardecup");
 	return v;//epsilon

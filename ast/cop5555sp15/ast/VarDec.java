@@ -12,11 +12,11 @@ public class VarDec extends Declaration {
 		this.type = type;
 	}
 
-	public VarDec(Token firstToken, Token identToken) {
-		super(firstToken);
-		this.identToken = identToken;
-		this.type = new SimpleType(firstToken, identToken);
-	}
+	// public VarDec(Token firstToken, Token identToken) {
+	// 	super(firstToken);
+	// 	this.identToken = identToken;
+	// 	this.type = new UndeclaredType(firstToken);
+	// }
 
 
 	@Override
