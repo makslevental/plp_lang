@@ -1,7 +1,10 @@
 #!/bin/bash
 if [ -z "$CLASSPATH" ]; then 
-    export CLASSPATH=/home/maksim/Desktop/plp_lang/parser/:/home/maksim/Desktop/plp_lang/ast/:/home/maksim/Desktop/plp_lang/scanner/:/usr/share/java/junit-4.12.jar:/usr/share/java/hamcrest-core-1.3.jar;
+    export CLASSPATH=/home/maksim/Desktop/plp_lang/parser/:/home/maksim/Desktop/plp_lang/ast/:/home/maksim/Desktop/plp_lang/scanner/:/usr/share/java/junit-4.12.jar:/usr/share/java/hamcrest-core-1.3.jar:/home/maksim/Desktop/plp_lang/type_checking_code_generation/asm-5.0.3.jar:/home/maksim/Desktop/plp_lang/type_checking_code_generation/asm-util-5.0.3.jar:/home/maksim/Desktop/plp_lang/type_checking_code_generation/;
 fi
+
+
+
 
 
 if [ "$1" = "DEBUGSCANNER" ]; then
@@ -26,7 +29,7 @@ elif [ "$1" = "DEBUGAST" ]; then
     jdb -classpath $CLASSPATH org.junit.runner.JUnitCore cop5555sp15.TestParser 
 elif [ "$1" = "TESTAST" ]; then
     javac -cp $CLASSPATH ast/TestParser.java ast/Parser.java
-    mv ast/*.class parser/cop5555sp15/
+    mv ast/*.class ast/cop5555sp15/
     java -cp $CLASSPATH org.junit.runner.JUnitCore cop5555sp15.TestParser 
 elif [ "$1" = "DEBUGASTEX" ]; then
     javac -g -cp $CLASSPATH ast/TestParserErrorHandling.java ast/Parser.java
@@ -34,6 +37,10 @@ elif [ "$1" = "DEBUGASTEX" ]; then
     jdb -classpath $CLASSPATH org.junit.runner.JUnitCore cop5555sp15.TestParserErrorHandling 
 elif [ "$1" = "TESTASTEX" ]; then
     javac -cp $CLASSPATH ast/TestParserErrorHandling.java ast/Parser.java
-    mv ast/*.class parser/cop5555sp15/
+    mv ast/*.class ast/cop5555sp15/
     java -cp $CLASSPATH org.junit.runner.JUnitCore cop5555sp15.TestParserErrorHandling 
+elif [ "$1" = "TESTCODETYPE" ]; then
+    javac -cp $CLASSPATH type_checking_code_generation/cop5555sp15/Assignment4Tests.java
+    #mv ast/*.class type_checking_code_generation/cop5555sp15/
+    java -cp $CLASSPATH org.junit.runner.JUnitCore cop5555sp15.Assignment4Tests 
 fi
