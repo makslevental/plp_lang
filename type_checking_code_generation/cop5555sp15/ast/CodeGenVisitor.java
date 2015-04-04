@@ -56,8 +56,14 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 	public Object visitBooleanLitExpression(
 			BooleanLitExpression booleanLitExpression, Object arg)
 			throws Exception {
-		throw new UnsupportedOperationException(
-				"code generation not yet implemented");
+		MethodVisitor mv = ((InheritedAttributes) arg).mv; // this should be the
+															// first statement
+															// of all visit
+															// methods that
+															// generate
+															// instructions
+		mv.visitLdcInsn(booleanLitExpression.value);
+		return null;
 	}
 
 	@Override

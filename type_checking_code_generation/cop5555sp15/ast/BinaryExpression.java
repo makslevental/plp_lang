@@ -7,6 +7,15 @@ public class BinaryExpression extends Expression {
 	Token op;
 	Expression expression1;
 	
+	String binaryExpressionType;
+
+	public String getType() {
+		return binaryExpressionType;
+	}
+
+	public void setType(String type) {
+		this.binaryExpressionType = type;
+	}
 
 	public BinaryExpression(Token firstToken, Expression expression0,
 			Token op, Expression expression1) {

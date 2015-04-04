@@ -120,7 +120,7 @@ public void printIntLiteral() throws Exception{
 @Test
 /**
  * generates and executes code to print a boolean literal
- * The TypeCheckVisitor should set the type of the IntLitExpression to booleanType
+ * The TypeCheckVisitor should set the type of the BooleanLitExpression to booleanType
  * booleanType is a constant defined in TypeConstants.java
  * @throws Exception
  * 
