@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ -z "$CLASSPATH" ]; then 
-    export CLASSPATH=/home/maksim/Desktop/plp_lang/parser/:/home/maksim/Desktop/plp_lang/ast/:/home/maksim/Desktop/plp_lang/scanner/:/usr/share/java/junit-4.12.jar:/usr/share/java/hamcrest-core-1.3.jar:/home/maksim/Desktop/plp_lang/type_checking_code_generation/asm-5.0.3.jar:/home/maksim/Desktop/plp_lang/type_checking_code_generation/asm-util-5.0.3.jar:/home/maksim/Desktop/plp_lang/type_checking_code_generation/;
+    export CLASSPATH=/home/max/Desktop/plp_lang/parser/:/home/max/Desktop/plp_lang/ast/:/home/max/Desktop/plp_lang/scanner/:/home/max/Desktop/plp_lang/type_checking_code_generation/junit-4.12.jar:/home/max/Desktop/plp_lang/type_checking_code_generation/hamcrest-core-1.3.jar:/home/max/Desktop/plp_lang/type_checking_code_generation/asm-5.0.3.jar:/home/max/Desktop/plp_lang/type_checking_code_generation/asm-util-5.0.3.jar:/home/max/Desktop/plp_lang/type_checking_code_generation/;
 fi
 
 

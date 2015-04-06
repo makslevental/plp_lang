@@ -46,10 +46,11 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 	MethodVisitor mv = ((InheritedAttributes) arg).mv;
 	
 	binaryExpression.expression0.visit(this, arg);
-	mv.visitVarInsn(ASTORE, 1);
+	//mv.visitVarInsn(ASTORE, 1);
 	binaryExpression.expression1.visit(this, arg);
-	mv.visitVarInsn(ASTORE, 2);
+	//mv.visitVarInsn(ASTORE, 2);
 	Kind op = binaryExpression.op.kind;
+	//top of the stack is the second expression, next is first expression
 
 	switch(op){
 	case TIMES:
@@ -65,47 +66,43 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 	    if(binaryExpression.getType().equals(intType))
 		mv.visitInsn(IADD);
 	    else{
+		//top of the stack is the second expression, next is first expression right now. will
+		//concat in reverse order if no swap
+		mv.visitInsn(SWAP);
 		mv.visitTypeInsn(NEW, "java/lang/StringBuilder");
 		//init consumes ref so hence dup
 		mv.visitInsn(DUP);
-		mv.visitVarInsn(ALOAD, 1);
+		//mv.visitVarInsn(ALOAD, 1);
 		//change stored var to string (even though it's already a string).
 		//note in parens is the type of the argument and outside is the return type
-		mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(Ljava/lang/Object;)Ljava/lang/String;", false);
+		//mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(Ljava/lang/Object;)Ljava/lang/String;", false);
 		/*init sb with first string
 		method invocation looks below the top of the stack. so right now
 		the top of the stack has a string and just below is sb ref. 
 		invokespecial will find the ref, call the 1 argument constructor and take the 
 		top of the stack is the argument
 		*/
-		mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "(Ljava/lang/String;)V", false);
+		mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V", false);
+		//mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "(Ljava/lang/String;)V", false);
+		mv.visitInsn(SWAP);
 		//push sb down and put second word
-		mv.visitVarInsn(ALOAD, 2);
+		//mv.visitVarInsn(ALOAD, 2);
 		/*again method invocation will look below the top of the stack, find
 		find the sb ref and take the second word as the arg to append.
 		*/
+		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;", false);
+		mv.visitInsn(SWAP);
 		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;", false);
 		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "toString", "()Ljava/lang/String;", false);
 	    }
 	    break;
 	case EQUAL:
-	    if(binaryExpression.getType().equals(intType)){
-		Label eq = new Label();
-		Label ne = new Label();
-
-		mv.visitJumpInsn(IF_ICMPEQ, eq);
-		
-		mv.visitLabel(ne);
-		mv.visitLdcInsn(ICONST_0);
-		mv.visitInsn(RETURN);
-
-		mv.visitLabel(eq);
-		mv.visitLdcInsn(ICONST_1);
-		mv.visitInsn(RETURN);
+	    if(binaryExpression.expression0.getType().equals(intType)){
+		mv.visitInsn(IXOR);
+		mv.visitInsn(ICONST_1);
+		mv.visitInsn(IXOR);
 	    }
 	    else{
-		mv.visitVarInsn(ALOAD, 1);
-		mv.visitVarInsn(ALOAD, 2);
 		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/String;)Z", false);
 	    }
 	    break;
