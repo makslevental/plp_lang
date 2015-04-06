@@ -5,7 +5,7 @@ import cop5555sp15.TokenStream.Token;
 public abstract class Expression extends ASTNode {
 	
 	String expressionType;
-
+	Object value;
 	public String getType() {
 		return expressionType;
 	}

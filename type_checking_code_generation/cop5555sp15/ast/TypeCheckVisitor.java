@@ -1,5 +1,7 @@
 package cop5555sp15.ast;
 
+import cop5555sp15.TokenStream.Kind;
+import cop5555sp15.TokenStream.Token;
 import cop5555sp15.TypeConstants;
 import cop5555sp15.symbolTable.SymbolTable;
 
@@ -44,10 +46,24 @@ public class TypeCheckVisitor implements ASTVisitor, TypeConstants {
     @Override
     public Object visitBinaryExpression(BinaryExpression binaryExpression,
 					Object arg) throws Exception {
+
+	binaryExpression.expression0.visit(this, arg);
+	binaryExpression.expression1.visit(this, arg);
+
 	if(!binaryExpression.expression0.getType().equals(binaryExpression.expression1.getType()))
 	    throw new TypeCheckException("type mismatch in BinaryExpression",binaryExpression);
-	binaryExpression.setType(binaryExpression.expression0.getType());
-	return binaryExpression.getType();
+	
+	Kind op = binaryExpression.op.kind;
+
+	if( op == Kind.TIMES || op == Kind.DIV || op == Kind.PLUS || op == Kind.MINUS){
+	    binaryExpression.setType(binaryExpression.expression0.getType());
+	    return binaryExpression.getType();
+	}
+	else{
+	    binaryExpression.setType(booleanType);
+	    return binaryExpression.getType();
+	} 
+
     }
 
     /**
@@ -290,7 +306,8 @@ public class TypeCheckVisitor implements ASTVisitor, TypeConstants {
     public Object visitStringLitExpression(
 					   StringLitExpression stringLitExpression, Object arg)
 	throws Exception {
-	throw new UnsupportedOperationException("not yet implemented");
+	stringLitExpression.setType(stringType);
+	return booleanType;
     }
 
     /**
