@@ -3,10 +3,15 @@ package cop5555sp15.ast;
 import org.objectweb.asm.*;
 import cop5555sp15.TokenStream.Kind;
 import cop5555sp15.TypeConstants;
-import static cop5555sp15.TokenStream.Kind.PLUS;
-import static cop5555sp15.TokenStream.Kind.MINUS;
-import static cop5555sp15.TokenStream.Kind.TIMES;
-import static cop5555sp15.TokenStream.Kind.DIV;
+//import static cop5555sp15.TokenStream.Kind.PLUS;
+//import static cop5555sp15.TokenStream.Kind.MINUS;
+//import static cop5555sp15.TokenStream.Kind.TIMES;
+//import static cop5555sp15.TokenStream.Kind.DIV;
+//import static cop5555sp15.TokenStream.Kind.PLUS;
+//import static cop5555sp15.TokenStream.Kind.MINUS;
+//import static cop5555sp15.TokenStream.Kind.TIMES;
+//import static cop5555sp15.TokenStream.Kind.DIV;
+
 public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 
     ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
@@ -106,6 +111,15 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/String;)Z", false);
 	    }
 	    break;
+	case LT:// expression0 < expression1
+	    if(binaryExpression.expression0.getType().equals(intType)){
+		mv.visitInsn(IXOR);
+		mv.visitInsn(ICONST_1);
+		mv.visitInsn(IXOR);
+	    }
+	    else{
+		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/String;)Z", false);
+	    }
 	default:    
 	    throw new UnsupportedOperationException(
 						    "code generation not yet implemented");
