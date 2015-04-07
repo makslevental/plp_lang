@@ -98,7 +98,11 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 	    break;
 	case EQUAL:
 	    if(binaryExpression.expression0.getType().equals(intType)){
+		//xor the top two things on the stack. if they're the same
+		//then the stack will have zero. if different will have 1.
 		mv.visitInsn(IXOR);
+		//xor again with 1. 1 xor 1 will give 0 meaning not equal
+		// 0 xor 1 will give 1 meaning equal
 		mv.visitInsn(ICONST_1);
 		mv.visitInsn(IXOR);
 	    }
