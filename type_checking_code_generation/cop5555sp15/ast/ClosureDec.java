@@ -5,11 +5,11 @@ import cop5555sp15.TokenStream.Token;
 public class ClosureDec extends Declaration {
 	Token identToken;
 	Closure closure;
-
 	public ClosureDec(Token firstToken, Token identToken, Closure closure) {
 		super(firstToken);
 		this.identToken = identToken;
 		this.closure = closure;
+		this.type = new UndeclaredType(firstToken);
 	}
 
 	@Override

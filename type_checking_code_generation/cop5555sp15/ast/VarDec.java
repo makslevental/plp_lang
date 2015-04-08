@@ -4,8 +4,6 @@ import cop5555sp15.TokenStream.Token;
 
 public class VarDec extends Declaration {
 	Token identToken;
-	Type type;
-	
 
 	public VarDec(Token firstToken, Token identToken, Type type) {
 		super(firstToken);

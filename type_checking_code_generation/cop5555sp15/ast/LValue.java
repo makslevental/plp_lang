@@ -5,7 +5,7 @@ import cop5555sp15.TokenStream.Token;
 public abstract class LValue extends ASTNode {
 	
 	String type;
-	
+	Token identToken;
 	
 
 	public String getType() {

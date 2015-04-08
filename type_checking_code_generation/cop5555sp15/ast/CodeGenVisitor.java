@@ -3,14 +3,6 @@ package cop5555sp15.ast;
 import org.objectweb.asm.*;
 import cop5555sp15.TokenStream.Kind;
 import cop5555sp15.TypeConstants;
-//import static cop5555sp15.TokenStream.Kind.PLUS;
-//import static cop5555sp15.TokenStream.Kind.MINUS;
-//import static cop5555sp15.TokenStream.Kind.TIMES;
-//import static cop5555sp15.TokenStream.Kind.DIV;
-//import static cop5555sp15.TokenStream.Kind.PLUS;
-//import static cop5555sp15.TokenStream.Kind.MINUS;
-//import static cop5555sp15.TokenStream.Kind.TIMES;
-//import static cop5555sp15.TokenStream.Kind.DIV;
 
 public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 
@@ -24,6 +16,8 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
     FieldVisitor fv;
     String className;
     String classDescriptor;
+    static Label lbeg = new Label();
+    static Label lend = new Label();
 
     // This class holds all attributes that need to be passed downwards as the
     // AST is traversed. Initially, it only holds the current MethodVisitor.
@@ -41,8 +35,19 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
     public Object visitAssignmentStatement(
 					   AssignmentStatement assignmentStatement, Object arg)
 	throws Exception {
-	throw new UnsupportedOperationException(
-						"code generation not yet implemented");
+	MethodVisitor mv = ((InheritedAttributes) arg).mv;
+	//just fetch info about identifier
+	String varName = assignmentStatement.lvalue.identToken.getText();
+	String type = assignmentStatement.lvalue.getType();
+	//get this, which has a field var called varName
+	//mv.visitLocalVariable("this", classDescriptor, null, lbeg, lend, 0);
+	mv.visitVarInsn(ALOAD,0);
+	//mv.visitFieldInsn(GETFIELD, className, "this", classDescriptor);
+	//leave expression value on the stack
+	assignmentStatement.expression.visit(this,arg);
+
+	mv.visitFieldInsn(PUTFIELD, className, varName, type);
+	return null;
     }
 
     @Override
@@ -222,8 +227,13 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
     @Override
     public Object visitIdentExpression(IdentExpression identExpression,
 				       Object arg) throws Exception {
-	throw new UnsupportedOperationException(
-						"code generation not yet implemented");
+	MethodVisitor mv = ((InheritedAttributes) arg).mv;
+	//mv.visitFieldInsn(GETFIELD, className, "this", classDescriptor);
+	mv.visitVarInsn(ALOAD,0);
+	String varName = identExpression.identToken.getText();
+	String type = identExpression.getType();
+	mv.visitFieldInsn(GETFIELD, className, varName, type);
+	return null;
     }
 
     @Override
@@ -374,12 +384,12 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 					  null // array of strings containing exceptions
 					  );
 	mv.visitCode();
-	Label lbeg = new Label();
+	//Label lbeg = new Label();
 	mv.visitLabel(lbeg);
 	mv.visitLineNumber(program.firstToken.lineNumber, lbeg);
 	program.block.visit(this, new InheritedAttributes(mv));
 	mv.visitInsn(RETURN);
-	Label lend = new Label();
+	//Label lend = new Label();
 	mv.visitLabel(lend);
 	mv.visitLocalVariable("this", classDescriptor, null, lbeg, lend, 0);
 	mv.visitMaxs(0, 0);  //this is required just before the end of a method. 
@@ -451,8 +461,11 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 
     @Override
     public Object visitVarDec(VarDec varDec, Object arg) throws Exception {
-	throw new UnsupportedOperationException(
-						"code generation not yet implemented");
+	String varName = varDec.identToken.getText();
+	String type = varDec.type.getJVMType();
+	fv = cw.visitField(0, varName, type, null, null);
+	fv.visitEnd();
+	return null;
     }
 
     @Override

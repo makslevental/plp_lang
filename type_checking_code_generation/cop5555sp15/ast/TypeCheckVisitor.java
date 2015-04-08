@@ -35,7 +35,9 @@ public class TypeCheckVisitor implements ASTVisitor, TypeConstants {
      */
     @Override
     public Object visitAssignmentStatement ( AssignmentStatement assignmentStatement, Object arg) throws Exception {
-	if(!assignmentStatement.lvalue.getType().equals(assignmentStatement.expression.getType()))
+	;
+	
+	if(!assignmentStatement.lvalue.visit(this,arg).equals(assignmentStatement.expression.visit(this,arg)))
 	    throw new TypeCheckException("type mismatch in AssignmentStatement",assignmentStatement);
 	return null;
     }
@@ -173,13 +175,20 @@ public class TypeCheckVisitor implements ASTVisitor, TypeConstants {
     @Override
     public Object visitIdentExpression(IdentExpression identExpression,
 				       Object arg) throws Exception {
-	throw new UnsupportedOperationException("not yet implemented");
+	Declaration identDec = symbolTable.lookup(identExpression.identToken.getText());
+	if(identDec == null)
+	    throw new TypeCheckException("undeclared variable", identExpression);
+	identExpression.setType(identDec.getType().getJVMType());
+	return identDec.getType().getJVMType();
     }
 
     @Override
-    public Object visitIdentLValue(IdentLValue identLValue, Object arg)
-	throws Exception {
-	throw new UnsupportedOperationException("not yet implemented");
+    public Object visitIdentLValue(IdentLValue identLValue, Object arg) throws Exception {
+	Declaration identDec = symbolTable.lookup(identLValue.identToken.getText());
+	if(identDec == null)
+	    throw new TypeCheckException("undeclared variable", identLValue);
+	identLValue.setType(identDec.getType().getJVMType());
+	return identDec.getType().getJVMType();
     }
 
     @Override
@@ -305,7 +314,7 @@ public class TypeCheckVisitor implements ASTVisitor, TypeConstants {
     @Override
     public Object visitSimpleType(SimpleType simpleType, Object arg)
 	throws Exception {
-	throw new UnsupportedOperationException("not yet implemented");
+	return simpleType.getJVMType();
     }
 
     @Override
@@ -349,7 +358,10 @@ public class TypeCheckVisitor implements ASTVisitor, TypeConstants {
      */
     @Override
     public Object visitVarDec(VarDec varDec, Object arg) throws Exception {
-	throw new UnsupportedOperationException("not yet implemented");
+	if(symbolTable.lookup(varDec.identToken.getText())!= null)
+	    throw new TypeCheckException("variable already declared", varDec);
+	symbolTable.insert(varDec.identToken.getText(), varDec);
+	return null;
     }
 
     /**

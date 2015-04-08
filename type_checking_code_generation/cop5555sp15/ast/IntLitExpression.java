@@ -4,12 +4,13 @@ import cop5555sp15.TokenStream.Token;
 
 public class IntLitExpression extends Expression {
 	int value;
-	
+	String type;
 	
 
 	public IntLitExpression(Token firstToken, int value) {
 		super(firstToken);
 		this.value = value;
+		this.type = "int";
 	}
 
 

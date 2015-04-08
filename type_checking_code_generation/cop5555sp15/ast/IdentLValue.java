@@ -3,7 +3,6 @@ package cop5555sp15.ast;
 import cop5555sp15.TokenStream.Token;
 
 public class IdentLValue extends LValue {
-	Token identToken;
 	
 
 	@Override

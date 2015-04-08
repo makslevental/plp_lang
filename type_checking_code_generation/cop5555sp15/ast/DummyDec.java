@@ -1,6 +1,6 @@
 package cop5555sp15.ast;
-
-
+import cop5555sp15.TokenStream.Kind;
+import cop5555sp15.TokenStream.Token;
 public class DummyDec extends Declaration {
 
 	String ident;
@@ -9,6 +9,7 @@ public class DummyDec extends Declaration {
 		super(null);
 		this.ident=ident;
 		this.dummyType=comment;
+		this.type = new UndeclaredType(new Token(NL_NULL, -1, -1, -1))
 	}
 
 	@Override
