@@ -3,6 +3,7 @@ package cop5555sp15.ast;
 import cop5555sp15.TokenStream.Token;
 
 public class StringLitExpression extends Expression {
+	
 	String value;
 	
 	public StringLitExpression(Token firstToken, String value) {
