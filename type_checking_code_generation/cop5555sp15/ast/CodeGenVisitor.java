@@ -68,9 +68,8 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 	    mv.visitInsn(IDIV);
 	    break;
 	case PLUS:
-	    if(binaryExpression.getType().equals(intType))
-		mv.visitInsn(IADD);
-	    else{
+	    if(binaryExpression.getType().equals(intType)) mv.visitInsn(IADD);
+	    else if(binaryExpression.getType().equals(stringType)){
 		//top of the stack is the second expression, next is first expression right now. will
 		//concat in reverse order if no swap
 		mv.visitInsn(SWAP);
@@ -100,10 +99,11 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;", false);
 		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "toString", "()Ljava/lang/String;", false);
 	    }
+	    else throw new UnsupportedOperationException("unsupported operation");
 	    break;
 	case EQUAL:
 	    if(binaryExpression.expression0.getType().equals(stringType)) mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false);
-	    else  branch_insn(mv, IF_ICMPEQ);
+	    else branch_insn(mv, IF_ICMPEQ);
 	    break;
 	case NOTEQUAL:
 	    if(binaryExpression.expression0.getType().equals(stringType)){
@@ -115,26 +115,31 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 	    else branch_insn(mv, IF_ICMPNE);
 	    break;
 	case LT:// expression0 < expression1
-	    branch_insn(mv, IF_ICMPLT);
+	    if(binaryExpression.expression0.getType().equals(intType)) branch_insn(mv, IF_ICMPLT);
+	    else throw new UnsupportedOperationException("unsupported operation");
 	    break;
 	case LE:// expression0 < expression1
-	    branch_insn(mv, IF_ICMPLE);
+	    if(binaryExpression.expression0.getType().equals(intType)) branch_insn(mv, IF_ICMPLE);
+	    else throw new UnsupportedOperationException("unsupported operation");
 	    break;
 	case GT:// expression0 < expression1
-	    branch_insn(mv, IF_ICMPGT);
+	    if(binaryExpression.expression0.getType().equals(intType)) branch_insn(mv, IF_ICMPGT);
+	    else throw new UnsupportedOperationException("unsupported operation");
 	    break;
 	case GE:// expression0 < expression1
-	    branch_insn(mv, IF_ICMPGE);
+	    if(binaryExpression.expression0.getType().equals(intType)) branch_insn(mv, IF_ICMPGE);
+	    else throw new UnsupportedOperationException("unsupported operation");
 	    break;
 	case BAR:
-	    mv.visitInsn(IOR);
+	    if(binaryExpression.getType().equals(booleanType)) mv.visitInsn(IOR);
+	    else throw new UnsupportedOperationException("unsupported operation");
 	    break;
 	case AND:
-	    mv.visitInsn(IAND);
+	    if(binaryExpression.getType().equals(booleanType)) mv.visitInsn(IAND);
+	    else throw new UnsupportedOperationException("unsupported operation");
 	    break;
 	default:    
-	    throw new UnsupportedOperationException(
-						    "code generation not yet implemented");
+	    throw new UnsupportedOperationException("code generation not yet implemented");
 	} 
 	return null;
     }

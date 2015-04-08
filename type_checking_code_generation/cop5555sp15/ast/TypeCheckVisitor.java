@@ -49,21 +49,35 @@ public class TypeCheckVisitor implements ASTVisitor, TypeConstants {
 
 	binaryExpression.expression0.visit(this, arg);
 	binaryExpression.expression1.visit(this, arg);
-
+	
 	if(!binaryExpression.expression0.getType().equals(binaryExpression.expression1.getType()))
 	    throw new TypeCheckException("type mismatch in BinaryExpression",binaryExpression);
 	
 	Kind op = binaryExpression.op.kind;
 
-	if( op == Kind.TIMES || op == Kind.DIV || op == Kind.PLUS || op == Kind.MINUS){
-	    binaryExpression.setType(binaryExpression.expression0.getType());
-	    return binaryExpression.getType();
+	if(binaryExpression.expression0.getType().equals(intType) && (op == Kind.TIMES || op == Kind.DIV || op == Kind.PLUS || op == Kind.MINUS)){
+	    binaryExpression.setType(intType);
+	    return intType;
 	}
-	else{
+	else if(binaryExpression.expression0.getType().equals(intType) && (op == Kind.LT || op == Kind.LE || op == Kind.GT || op == Kind.GE || op == Kind.EQUAL || op == Kind.NOTEQUAL)){
 	    binaryExpression.setType(booleanType);
-	    return binaryExpression.getType();
+	    return booleanType;
+	}
+	else if(binaryExpression.expression0.getType().equals(booleanType) && (op == Kind.EQUAL || op == Kind.NOTEQUAL || op == Kind.AND || op == Kind.BAR)) {
+	    binaryExpression.setType(booleanType);
+	    return booleanType;
 	} 
-
+	else if(binaryExpression.expression0.getType().equals(stringType) && op == Kind.PLUS) {
+	    
+	    binaryExpression.setType(stringType);
+	    return stringType;
+	}
+	else if(binaryExpression.expression0.getType().equals(stringType) && (op == Kind.EQUAL || op== Kind.NOTEQUAL)) {
+	    binaryExpression.setType(booleanType);
+	    return booleanType;
+	}
+	else throw new TypeCheckException("unsupported operation in BinaryExpression",binaryExpression);
+	
     }
 
     /**
@@ -92,9 +106,7 @@ public class TypeCheckVisitor implements ASTVisitor, TypeConstants {
      * @throws Exception
      */
     @Override
-    public Object visitBooleanLitExpression(
-					    BooleanLitExpression booleanLitExpression, Object arg)
-	throws Exception {
+    public Object visitBooleanLitExpression(BooleanLitExpression booleanLitExpression, Object arg) throws Exception {
 	booleanLitExpression.setType(booleanType);
 	return booleanType;
     }
@@ -307,7 +319,7 @@ public class TypeCheckVisitor implements ASTVisitor, TypeConstants {
 					   StringLitExpression stringLitExpression, Object arg)
 	throws Exception {
 	stringLitExpression.setType(stringType);
-	return booleanType;
+	return stringType;
     }
 
     /**
