@@ -82,10 +82,10 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 		//note in parens is the type of the argument and outside is the return type
 		//mv.visitMethodInsn(INVOKESTATIC, "java/lang/String", "valueOf", "(Ljava/lang/Object;)Ljava/lang/String;", false);
 		/*init sb with first string
-		method invocation looks below the top of the stack. so right now
-		the top of the stack has a string and just below is sb ref. 
-		invokespecial will find the ref, call the 1 argument constructor and take the 
-		top of the stack is the argument
+		  method invocation looks below the top of the stack. so right now
+		  the top of the stack has a string and just below is sb ref. 
+		  invokespecial will find the ref, call the 1 argument constructor and take the 
+		  top of the stack is the argument
 		*/
 		mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "()V", false);
 		//mv.visitMethodInsn(INVOKESPECIAL, "java/lang/StringBuilder", "<init>", "(Ljava/lang/String;)V", false);
@@ -93,7 +93,7 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 		//push sb down and put second word
 		//mv.visitVarInsn(ALOAD, 2);
 		/*again method invocation will look below the top of the stack, find
-		find the sb ref and take the second word as the arg to append.
+		  find the sb ref and take the second word as the arg to append.
 		*/
 		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "(Ljava/lang/String;)Ljava/lang/StringBuilder;", false);
 		mv.visitInsn(SWAP);
@@ -102,42 +102,56 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
 	    }
 	    break;
 	case EQUAL:
-	    if(binaryExpression.expression0.getType().equals(intType)){
-		//xor the top two things on the stack. if they're the same
-		//then the stack will have zero. if different will have 1.
-		mv.visitInsn(IXOR);
-		//xor again with 1. 1 xor 1 will give 0 meaning not equal
-		// 0 xor 1 will give 1 meaning equal
+	    if(binaryExpression.expression0.getType().equals(stringType)) mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false);
+	    else  branch_insn(mv, IF_ICMPEQ);
+	    break;
+	case NOTEQUAL:
+	    if(binaryExpression.expression0.getType().equals(stringType)){
+		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/Object;)Z", false);
+		//if neq then equals returns zero and 0 xor 1 = 1;
 		mv.visitInsn(ICONST_1);
 		mv.visitInsn(IXOR);
 	    }
-	    else{
-		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/String;)Z", false);
-	    }
+	    else branch_insn(mv, IF_ICMPNE);
 	    break;
 	case LT:// expression0 < expression1
-	    if(binaryExpression.expression0.getType().equals(intType)){
-		mv.visitInsn(IXOR);
-		mv.visitInsn(ICONST_1);
-		mv.visitInsn(IXOR);
-	    }
-	    else{
-		mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/String", "equals", "(Ljava/lang/String;)Z", false);
-	    }
+	    branch_insn(mv, IF_ICMPLT);
+	    break;
+	case LE:// expression0 < expression1
+	    branch_insn(mv, IF_ICMPLE);
+	    break;
+	case GT:// expression0 < expression1
+	    branch_insn(mv, IF_ICMPGT);
+	    break;
+	case GE:// expression0 < expression1
+	    branch_insn(mv, IF_ICMPGE);
+	    break;
+	case BAR:
+	    mv.visitInsn(IOR);
+	    break;
+	case AND:
+	    mv.visitInsn(IAND);
+	    break;
 	default:    
 	    throw new UnsupportedOperationException(
 						    "code generation not yet implemented");
 	} 
-
-
-	//need to evaluate sub expression
-	//if two integers
-	
-	//if two strings
-	// mv.visitFieldInsn(GETSTATIC, "java/lang/String", "valueOf", "Ljava/lang/String;");
-	// mv.visitLdcInsn(binaryExpression.expression0.value);
-	// mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/StringBuilder", "append", "Ljava/lang/StringBuilder;" , false);
 	return null;
+    }
+
+    private void branch_insn(MethodVisitor mv, int cmp){
+	Label exit = new Label();
+	Label testPass = new Label();
+
+	mv.visitJumpInsn(cmp,testPass);
+
+	mv.visitInsn(ICONST_0);
+	mv.visitJumpInsn(GOTO,exit);
+	
+	mv.visitLabel(testPass);
+	mv.visitInsn(ICONST_1);
+
+	mv.visitLabel(exit);
     }
 
     @Override
@@ -152,12 +166,7 @@ public class CodeGenVisitor implements ASTVisitor, Opcodes, TypeConstants {
     public Object visitBooleanLitExpression(
 					    BooleanLitExpression booleanLitExpression, Object arg)
 	throws Exception {
-	MethodVisitor mv = ((InheritedAttributes) arg).mv; // this should be the
-	// first statement
-	// of all visit
-	// methods that
-	// generate
-	// instructions
+	MethodVisitor mv = ((InheritedAttributes) arg).mv;
 	mv.visitLdcInsn(booleanLitExpression.value);
 	return null;
     }
