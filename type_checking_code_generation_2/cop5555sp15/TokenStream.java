@@ -33,6 +33,9 @@ public class TokenStream {
 		int length = inputString.length();
 		inputChars = new char[length];
 		inputString.getChars(0, length, inputChars, 0);
+		//System.out.println("inputChars length:"+length);
+		//for(int i=0;i<length;i++)
+		//    System.out.print((int)inputChars[i]+",");
 	}
 
 	// reads all the characters in the given reader into a char array.
@@ -77,8 +80,7 @@ public class TokenStream {
 	public static enum Kind {
 		IDENT,
 		/* reserved words */
-		KW_INT, KW_STRING, KW_BOOLEAN, KW_IMPORT, KW_CLASS, KW_DEF, 
-		KW_WHILE, KW_IF, KW_ELSE, KW_RETURN, KW_PRINT, KW_SIZE, KW_KEY, KW_VALUE,
+		KW_INT, KW_STRING, KW_BOOLEAN, KW_IMPORT, KW_CLASS, KW_DEF, KW_WHILE, KW_IF, KW_ELSE, KW_RETURN, KW_PRINT, KW_SIZE, KW_KEY, KW_VALUE,
 		/* boolean literals */
 		BL_TRUE, BL_FALSE,
 		/* null literal */
